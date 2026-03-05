@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — ACADALLY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/motion.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<div class="noise"></div>
+
+<div class="layout">
+
+    <!-- ── Sidebar ────────────────────────────── -->
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-brand">
+                <div class="sidebar-dot"></div>
+                <span>ACAD</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link active">
+                Overview
+                <span class="sidebar-link-count" id="nav-total"></span>
+            </a>
+            <a href="students.html" class="sidebar-link">
+                Students
+                <span class="sidebar-link-count" id="nav-students"></span>
+            </a>
+            <a href="classes.html" class="sidebar-link">
+                Classes
+            </a>
+            <a href="teachers.html" class="sidebar-link">
+                Teachers
+                <span class="sidebar-link-count" id="nav-teachers"></span>
+            </a>
+            <a href="search.html" class="sidebar-link">
+                Search
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-meta">
+                <div class="sidebar-meta-row">
+                    <span class="sidebar-meta-label">STATUS</span>
+                    <span class="sidebar-meta-val" style="color: var(--positive)">ONLINE</span>
+                </div>
+                <div class="sidebar-meta-row">
+                    <span class="sidebar-meta-label">VERSION</span>
+                    <span class="sidebar-meta-val">v3.0</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── Main ───────────────────────────────── -->
+
+    <main class="main">
+
+        <header class="page-header reveal" style="--d:0">
+            <div>
+                <span class="micro">MODULE 01 — OVERVIEW</span>
+                <h1>Dashboard</h1>
+            </div>
+            <span class="micro" id="last-updated"></span>
+        </header>
+
+        <!-- Stat cards -->
+        <div class="stat-row" id="stat-row"></div>
+
+        <!-- Distribution + Engagement -->
+        <div class="grid-2">
+            <div class="card reveal" style="--d:0">
+                <h3 class="card-title">Distribution by class</h3>
+                <div class="bar-rows" id="class-chart"></div>
+            </div>
+            <div class="card reveal" style="--d:1">
+                <h3 class="card-title">Platform metrics</h3>
+                <div class="metric-list" id="metrics"></div>
+            </div>
+        </div>
+
+        <!-- Sections + Leaderboard -->
+        <div class="grid-2">
+            <div class="card reveal" style="--d:0">
+                <h3 class="card-title">Sections</h3>
+                <div class="badge-grid" id="sections-grid"></div>
+            </div>
+            <div class="card reveal" style="--d:1">
+                <h3 class="card-title">Top performers</h3>
+                <div class="table-wrap" id="leaderboard"></div>
+            </div>
+        </div>
+
+        <!-- Schools -->
+        <div class="card reveal" style="--d:0">
+            <h3 class="card-title">Schools indexed</h3>
+            <div class="table-wrap" id="schools-table"></div>
+        </div>
+
+    </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

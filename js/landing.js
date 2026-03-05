@@ -1,79 +1,6 @@
 /**
- * landing.js — Landing page: reveal, counters, typing, particles, cursor.
+ * landing.js — Landing page: typing, particles, coords.
  */
-
-document.documentElement.classList.add('js');
-
-/* ── Custom cursor ────────────────────────────────── */
-
-function initCursor() {
-    if (window.matchMedia('(hover: none)').matches) return;
-
-    const rows = [
-        'B...............',
-        'BB..............',
-        'BWB.............',
-        'BWWB............',
-        'BWWWB...........',
-        'BWWWWB..........',
-        'BWWWWWB.........',
-        'BWWWWWWB........',
-        'BWWWWWWWB.......',
-        'BWWWWWWWWB......',
-        'BWWWWWWWWWB.....',
-        'BWWWWWWWWWWB....',
-        'BWWWWWWBBBBB....',
-        'BWWWBWWB........',
-        'BWWB.BWWB.......',
-        'BWB..BWWB.......',
-        'BB....BWWB......',
-        'B.....BWWB......',
-        '.......BWWB.....',
-        '.......BWWB.....',
-        '........BB......',
-    ];
-
-    const px = 2;
-    let rects = '';
-    rows.forEach((row, y) => {
-        for (let x = 0; x < row.length; x++) {
-            const c = row[x];
-            if (c === 'B')
-                rects += `<rect x="${x*px}" y="${y*px}" width="${px}" height="${px}" fill="#000"/>`;
-            else if (c === 'W')
-                rects += `<rect x="${x*px}" y="${y*px}" width="${px}" height="${px}" fill="#fff"/>`;
-        }
-    });
-
-    const svgW = 16 * px;
-    const svgH = rows.length * px;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}" shape-rendering="crispEdges">${rects}</svg>`;
-
-    const el = document.createElement('div');
-    el.className = 'cursor';
-    el.innerHTML = `<div class="cursor-icon">${svg}</div>`;
-    document.body.appendChild(el);
-
-    const dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    document.body.appendChild(dot);
-
-    document.addEventListener('mousemove', e => {
-        el.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        if (!el.classList.contains('visible')) el.classList.add('visible');
-    });
-
-        document.addEventListener('mouseleave', () => el.classList.remove('visible'));
-        document.addEventListener('mouseenter', () => el.classList.add('visible'));
-
-        const hoverEls = 'a, button, [data-hover], input, select, textarea, .hero-cta, .process-card';
-        document.addEventListener('mouseover', e => {
-            if (e.target.closest(hoverEls)) el.classList.add('hover');
-        });
-            document.addEventListener('mouseout', e => {
-                if (e.target.closest(hoverEls)) el.classList.remove('hover');
-            });
-}
 
 /* ── Typing effect with realistic mistakes ────────── */
 
@@ -88,22 +15,17 @@ function typeWithMistakes(el, phrases, opts = {}) {
     const textEl = el.querySelector('.hero-typing-text');
     if (!textEl) return;
 
-    let phraseIdx = 0;
-    let charIdx   = 0;
-    let deleting  = false;
-    let current   = '';
-    let mistakeBuffer = '';
-    let isCorrecting  = false;
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+    let current = '', mistakeBuffer = '', isCorrecting = false;
 
-    function randomMistake(intended) {
-        const nearby = {
-            a:'sq', b:'vn', c:'xv', d:'sf', e:'wr', f:'dg', g:'fh',
-            h:'gj', i:'uo', j:'hk', k:'jl', l:'k;', m:'n,', n:'bm',
-            o:'ip', p:'o[', q:'wa', r:'et', s:'ad', t:'ry', u:'yi',
-            v:'cb', w:'qe', x:'zc', y:'tu', z:'xa', ' ':' ',
+    function nearby(ch) {
+        const map = {
+            a:'sq',b:'vn',c:'xv',d:'sf',e:'wr',f:'dg',g:'fh',h:'gj',
+            i:'uo',j:'hk',k:'jl',l:'k;',m:'n,',n:'bm',o:'ip',p:'o[',
+            q:'wa',r:'et',s:'ad',t:'ry',u:'yi',v:'cb',w:'qe',x:'zc',
+            y:'tu',z:'xa',' ':' ',
         };
-        const key = intended.toLowerCase();
-        const pool = nearby[key] || key;
+        const pool = map[ch.toLowerCase()] || ch;
         return pool[Math.floor(Math.random() * pool.length)];
     }
 
@@ -124,12 +46,10 @@ function typeWithMistakes(el, phrases, opts = {}) {
 
         if (!deleting) {
             if (charIdx < phrase.length) {
-                const intended = phrase[charIdx];
-
+                const ch = phrase[charIdx];
                 if (!mistakeBuffer && Math.random() < mistakeRate && charIdx > 2) {
-                    const wrong = randomMistake(intended);
-                    current += wrong;
-                    mistakeBuffer = intended;
+                    current += nearby(ch);
+                    mistakeBuffer = ch;
                     textEl.textContent = current;
                     setTimeout(() => {
                         isCorrecting = true;
@@ -137,28 +57,21 @@ function typeWithMistakes(el, phrases, opts = {}) {
                     }, 200 + Math.random() * 150);
                     return;
                 }
-
                 if (mistakeBuffer) {
                     current += mistakeBuffer;
                     mistakeBuffer = '';
                     charIdx++;
                 } else {
-                    current += intended;
+                    current += ch;
                     charIdx++;
                 }
-
                 textEl.textContent = current;
-
-                let delay = typeSpeed + Math.random() * 30;
-                if (intended === '.' || intended === ',') delay += 200;
-                if (intended === ' ') delay += 40;
-
-                setTimeout(tick, delay);
+                let d = typeSpeed + Math.random() * 30;
+                if (ch === '.' || ch === ',') d += 200;
+                if (ch === ' ') d += 40;
+                setTimeout(tick, d);
             } else {
-                setTimeout(() => {
-                    deleting = true;
-                    tick();
-                }, pauseAfter);
+                setTimeout(() => { deleting = true; tick(); }, pauseAfter);
             }
         } else {
             if (current.length > 0) {
@@ -178,36 +91,24 @@ function typeWithMistakes(el, phrases, opts = {}) {
 }
 
 
-/* ── Spawn particles ──────────────────────────────── */
-
 function initParticles() {
-    const container = document.querySelector('.particles');
-    if (!container) return;
+    const c = document.querySelector('.particles');
+    if (!c) return;
 
     function spawn() {
         const p = document.createElement('div');
         p.className = 'particle';
-
-        const x = 10 + Math.random() * 80;
-        const size = 1.5 + Math.random() * 2;
-        const dur = 10 + Math.random() * 14;
-        const delay = Math.random() * 6;
-
-        p.style.left = x + '%';
+        p.style.left = (10 + Math.random() * 80) + '%';
         p.style.bottom = '-10px';
-        p.style.width = size + 'px';
-        p.style.height = size + 'px';
-        p.style.animationDuration = dur + 's';
-        p.style.animationDelay = delay + 's';
-
+        const s = 1.5 + Math.random() * 2;
+        p.style.width = s + 'px';
+        p.style.height = s + 'px';
+        p.style.animationDuration = (10 + Math.random() * 14) + 's';
+        p.style.animationDelay = (Math.random() * 6) + 's';
         const r = Math.random();
-        if (r > 0.65) {
-            p.style.background = 'rgba(255, 255, 255, 0.35)';
-        } else if (r > 0.4) {
-            p.style.background = 'rgba(139, 92, 246, 0.4)';
-        }
-
-        container.appendChild(p);
+        if (r > 0.65) p.style.background = 'rgba(255,255,255,0.35)';
+        else if (r > 0.4) p.style.background = 'rgba(139,92,246,0.4)';
+        c.appendChild(p);
         p.addEventListener('animationend', () => p.remove());
     }
 
@@ -218,16 +119,11 @@ function initParticles() {
 }
 
 
-/* ── Nav coordinate display ───────────────────────── */
-
 function initCoords() {
     const el = document.querySelector('.l-nav-coords');
     if (!el) return;
-
     document.addEventListener('mousemove', e => {
-        const x = e.clientX.toString().padStart(4, '0');
-        const y = e.clientY.toString().padStart(4, '0');
-        el.textContent = `X:${x} Y:${y}`;
+        el.textContent = `X:${String(e.clientX).padStart(4,'0')} Y:${String(e.clientY).padStart(4,'0')}`;
     });
 }
 
@@ -235,7 +131,6 @@ function initCoords() {
 /* ── Init ─────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', async () => {
-
     try {
         const r = await fetch('data/meta.json');
         if (r.ok) {
@@ -247,9 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (_) {}
 
-    initCursor();
-    initReveal();
-    initCounters();
+    initPage();
     initParticles();
     initCoords();
 
