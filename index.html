@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACADALLY DASHBOARD</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/motion.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- ── Nav ─────────────────────────────────────── -->
+
+<nav class="l-nav">
+    <div class="l-nav-mark">
+        <div class="l-nav-dot"></div>
+        <span class="micro">SYSTEM v3.0</span>
+    </div>
+    <div class="l-nav-right">
+        <div class="l-nav-status">
+            <span class="l-nav-status-dot"></span>
+            <span>ALL SYSTEMS NOMINAL</span>
+        </div>
+        <span class="l-nav-coords">X:0000 Y:0000</span>
+    </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────── -->
+
+<section class="hero">
+    <div class="hero-inner">
+        <h1 class="hero-line reveal" style="--d:0">Every profile.</h1>
+        <h1 class="hero-line reveal" style="--d:1">Every credential.</h1>
+        <h1 class="hero-line reveal" style="--d:2">Extracted.</h1>
+
+        <div class="hero-typing reveal" style="--d:4">
+            <span class="hero-typing-text"></span><span class="hero-typing-cursor"></span>
+        </div>
+
+        <div class="hero-stats reveal" style="--d:5">
+            <span><em class="counter" data-target="1319" data-key="total_students">0</em> students</span>
+            <span class="sep">·</span>
+            <span><em class="counter" data-target="5" data-key="total_teachers_found">0</em> teachers</span>
+            <span class="sep">·</span>
+            <span><em class="counter" data-target="2">0</em> schools</span>
+            <span class="sep">·</span>
+            <span><em class="counter" data-target="0">0</em> rate limits</span>
+        </div>
+
+        <a href="dashboard.html" class="hero-cta reveal" style="--d:7" data-hover>
+            <span class="hero-cta-text">Access Dashboard</span>
+            <span class="hero-cta-arrow">→</span>
+        </a>
+    </div>
+
+    <div class="particles"></div>
+    <div class="dot-grid"></div>
+</section>
+
+<!-- ── Process ─────────────────────────────────── -->
+
+<section class="process">
+    <span class="micro reveal" style="--d:0">THE PROCESS</span>
+
+    <div class="process-grid">
+        <div class="process-card reveal" style="--d:0" data-hover>
+            <span class="micro process-num">01</span>
+            <h3>Discover</h3>
+            <p>Username enumeration across all school prefixes. No authentication required.</p>
+            <div class="process-val">
+                <em class="counter" data-target="515764">0</em>
+                <span>credentials checked</span>
+            </div>
+        </div>
+
+        <div class="process-card reveal" style="--d:1" data-hover>
+            <span class="micro process-num">02</span>
+            <h3>Extract</h3>
+            <p>Automated login and full profile data capture via direct API requests.</p>
+            <div class="process-val">
+                <em class="counter" data-target="1319" data-key="total_students">0</em>
+                <span>profiles captured</span>
+            </div>
+        </div>
+
+        <div class="process-card reveal" style="--d:2" data-hover>
+            <span class="micro process-num">03</span>
+            <h3>Analyze</h3>
+            <p>Structured storage, cross-referencing, and statistical pattern analysis.</p>
+            <div class="process-val">
+                <em class="counter" data-target="18">0</em>
+                <span>data fields per record</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Extraction Log ──────────────────────────── -->
+
+<section class="log">
+    <span class="micro reveal" style="--d:0">EXTRACTION LOG</span>
+
+    <div class="log-list">
+        <div class="log-entry reveal" style="--d:0">
+            <span class="log-phase">Phase 1</span>
+            <span class="log-desc">Username discovery</span>
+            <span class="log-status ok">✓ complete</span>
+        </div>
+        <div class="log-entry reveal" style="--d:1">
+            <span class="log-phase">Phase 2</span>
+            <span class="log-desc">Profile extraction</span>
+            <span class="log-status ok">✓ complete</span>
+        </div>
+        <div class="log-entry reveal" style="--d:2">
+            <span class="log-phase">Phase 3</span>
+            <span class="log-desc">Teacher enumeration</span>
+            <span class="log-status ok">✓ complete</span>
+        </div>
+        <div class="log-entry reveal" style="--d:3">
+            <span class="log-phase">Phase 4</span>
+            <span class="log-desc">Credential cracking</span>
+            <span class="log-status warn">✓ partial</span>
+        </div>
+        <div class="log-entry reveal" style="--d:4">
+            <span class="log-phase">Phase 5</span>
+            <span class="log-desc">Dashboard deployed</span>
+            <span class="log-status live">active</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────── -->
+
+<footer class="l-footer">
+    <div class="l-footer-inner">
+        <div class="l-footer-left">
+            <span class="l-footer-brand">ACADALLY DASHBOARD</span>
+            <span class="l-footer-copy">© 2025 Anirudh Gupta. All rights reserved.</span>
+        </div>
+        <div class="l-footer-right">
+            <p class="l-footer-disclaimer">
+                This project is a security research demonstration. The creator assumes
+                no responsibility for any misuse of the information, tools, or data
+                presented. All data was obtained through publicly accessible endpoints
+                with predictable credentials. Unauthorized access to computer systems
+                is illegal. Use responsibly and ethically.
+            </p>
+        </div>
+    </div>
+    <div class="l-footer-bar">
+        <span class="micro">SYSTEM v3.0 · OPERATIONAL</span>
+        <div class="l-footer-links">
+            <a href="https://github.com/acadhack" target="_blank" rel="noopener">GitHub</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+    </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/* ── Reveal ───────────────────────────────────────── */
+
+.js .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.js .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+    transition-delay: calc(var(--d, 0) * 200ms);
+}
+
+/* Slower stagger for hero specifically */
+.js .hero .reveal.visible {
+    transition-duration: 1.1s;
+    transition-delay: calc(var(--d, 0) * 350ms);
+}
+
+/* ── Hover lift ───────────────────────────────────── */
+
+.lift {
+    transition:
+    transform var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.lift:hover {
+    transform: translateY(-2px);
+}

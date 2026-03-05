@@ -1,0 +1,292 @@
+[
+  {
+    "username": "preetigameti@yahoo.com",
+    "password": "Dpshar@04",
+    "password_found": true,
+    "name": "PREETI GAMETI",
+    "profile": {
+      "teacher_id": 432,
+      "teacher_name": "PREETI GAMETI",
+      "teacher_email": "preetigameti@yahoo.com",
+      "teacher_dp": "https://leap.acadally.com/teacher/static/display_picture/teacher_dp.svg",
+      "school_id": 77,
+      "school_name": "Delhi Public School Harni (DPS Harni)",
+      "school_board_name": "CBSE",
+      "school_code": "dpshar",
+      "school_logo": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/school_logos/dps_logo_AKds34c.jpeg",
+      "school_city": "123",
+      "school_version": 1,
+      "sections": "8-H-Math,9-F-Math,10-F-Math,6-G-Math",
+      "test_generator_allowed_boards": [
+        "CBSE"
+      ],
+      "show_test_generator": true
+    },
+    "classes": {
+      "total_class_count": 4,
+      "classes": [
+        {
+          "section_id": 554,
+          "course_id": 270,
+          "class_name": "8-H-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_XlMMO2q.svg",
+          "student_count": 36,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 560,
+          "course_id": 271,
+          "class_name": "9-F-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_FceQy3M.svg",
+          "student_count": 35,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 568,
+          "course_id": 272,
+          "class_name": "10-F-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_C2akMPW.svg",
+          "student_count": 39,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 537,
+          "course_id": 268,
+          "class_name": "6-G-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_hjwKXki.svg",
+          "student_count": 38,
+          "upcoming_chapters_count": 1
+        }
+      ]
+    }
+  },
+  {
+    "username": "shobha.dpsh@gmail.com",
+    "password": "Dpshar@15",
+    "password_found": true,
+    "name": "SHOBHA PANDEY",
+    "profile": {
+      "teacher_id": 438,
+      "teacher_name": "SHOBHA PANDEY",
+      "teacher_email": "shobha.dpsh@gmail.com",
+      "teacher_dp": "https://leap.acadally.com/teacher/static/display_picture/teacher_dp.svg",
+      "school_id": 77,
+      "school_name": "Delhi Public School Harni (DPS Harni)",
+      "school_board_name": "CBSE",
+      "school_code": "dpshar",
+      "school_logo": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/school_logos/dps_logo_AKds34c.jpeg",
+      "school_city": "123",
+      "school_version": 1,
+      "sections": "7-C-Math,6-C-Math,6-H-Math,8-A-Math",
+      "test_generator_allowed_boards": [
+        "CBSE"
+      ],
+      "show_test_generator": false
+    },
+    "classes": {
+      "total_class_count": 4,
+      "classes": [
+        {
+          "section_id": 541,
+          "course_id": 269,
+          "class_name": "7-C-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_IdJjL5M.svg",
+          "student_count": 34,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 533,
+          "course_id": 268,
+          "class_name": "6-C-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_hjwKXki.svg",
+          "student_count": 36,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 538,
+          "course_id": 268,
+          "class_name": "6-H-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_hjwKXki.svg",
+          "student_count": 37,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 547,
+          "course_id": 270,
+          "class_name": "8-A-Math",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/math_XlMMO2q.svg",
+          "student_count": 37,
+          "upcoming_chapters_count": 0
+        }
+      ]
+    }
+  },
+  {
+    "username": "sofiyavora28@gmail.com",
+    "password": "Dpshar@95",
+    "password_found": true,
+    "name": "SOFIYA A. VORA",
+    "profile": {
+      "teacher_id": 439,
+      "teacher_name": "SOFIYA VORA",
+      "teacher_email": "sofiyavora28@gmail.com",
+      "teacher_dp": "https://leap.acadally.com/teacher/static/display_picture/teacher_dp.svg",
+      "school_id": 77,
+      "school_name": "Delhi Public School Harni (DPS Harni)",
+      "school_board_name": "CBSE",
+      "school_code": "dpshar",
+      "school_logo": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/school_logos/dps_logo_AKds34c.jpeg",
+      "school_city": "123",
+      "school_version": 1,
+      "sections": "10-E-Physics,9-E-Physics,7-H-Science,10-F-Physics,9-F-Physics,8-A-Science,9-B-Physics,10-B-Physics",
+      "test_generator_allowed_boards": [
+        "CBSE"
+      ],
+      "show_test_generator": true
+    },
+    "classes": {
+      "total_class_count": 8,
+      "classes": [
+        {
+          "section_id": 567,
+          "course_id": 279,
+          "class_name": "10-E-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_HvYq7o9.svg",
+          "student_count": 37,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 559,
+          "course_id": 276,
+          "class_name": "9-E-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_m6NhK8G.svg",
+          "student_count": 37,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 546,
+          "course_id": 274,
+          "class_name": "7-H-Science",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Science_1_ViYJgyR.svg",
+          "student_count": 34,
+          "upcoming_chapters_count": 1
+        },
+        {
+          "section_id": 568,
+          "course_id": 279,
+          "class_name": "10-F-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_HvYq7o9.svg",
+          "student_count": 39,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 560,
+          "course_id": 276,
+          "class_name": "9-F-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_m6NhK8G.svg",
+          "student_count": 35,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 547,
+          "course_id": 275,
+          "class_name": "8-A-Science",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Science_1_7qfsvrq.svg",
+          "student_count": 37,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 556,
+          "course_id": 276,
+          "class_name": "9-B-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_m6NhK8G.svg",
+          "student_count": 35,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 564,
+          "course_id": 279,
+          "class_name": "10-B-Physics",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Physics_1_HvYq7o9.svg",
+          "student_count": 34,
+          "upcoming_chapters_count": 1
+        }
+      ]
+    }
+  },
+  {
+    "username": "vaishalidorkar@gmail.com",
+    "password": "Dpshar@75",
+    "password_found": true,
+    "name": "VAISHALI DORKAR",
+    "profile": {
+      "teacher_id": 443,
+      "teacher_name": "VAISHALI DORKAR",
+      "teacher_email": "vaishalidorkar@gmail.com",
+      "teacher_dp": "https://leap.acadally.com/teacher/static/display_picture/teacher_dp.svg",
+      "school_id": 77,
+      "school_name": "Delhi Public School Harni (DPS Harni)",
+      "school_board_name": "CBSE",
+      "school_code": "dpshar",
+      "school_logo": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/school_logos/dps_logo_AKds34c.jpeg",
+      "school_city": "123",
+      "school_version": 1,
+      "sections": "9-A-Biology,6-G-Science,9-G-Biology,7-F-Science,8-E-Science",
+      "test_generator_allowed_boards": [
+        "CBSE"
+      ],
+      "show_test_generator": true
+    },
+    "classes": {
+      "total_class_count": 5,
+      "classes": [
+        {
+          "section_id": 555,
+          "course_id": 278,
+          "class_name": "9-A-Biology",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Biology_1_HYQ732k.svg",
+          "student_count": 35,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 537,
+          "course_id": 273,
+          "class_name": "6-G-Science",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Science_1_eDv6QV1.svg",
+          "student_count": 38,
+          "upcoming_chapters_count": 2
+        },
+        {
+          "section_id": 561,
+          "course_id": 278,
+          "class_name": "9-G-Biology",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Biology_1_HYQ732k.svg",
+          "student_count": 30,
+          "upcoming_chapters_count": 0
+        },
+        {
+          "section_id": 544,
+          "course_id": 274,
+          "class_name": "7-F-Science",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Science_1_ViYJgyR.svg",
+          "student_count": 34,
+          "upcoming_chapters_count": 2
+        },
+        {
+          "section_id": 551,
+          "course_id": 275,
+          "class_name": "8-E-Science",
+          "icon": "https://leap2cdn-b8hhbrcsdugbacgc.z02.azurefd.net/leap2-data/media/subject_logos/Science_1_7qfsvrq.svg",
+          "student_count": 35,
+          "upcoming_chapters_count": 3
+        }
+      ]
+    }
+  },
+  {
+    "username": "maheshshitole76@gmail.com",
+    "password": null,
+    "password_found": false,
+    "name": "MAHESH SHITOLE"
+  }
+]

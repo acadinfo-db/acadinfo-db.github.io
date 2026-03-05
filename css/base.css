@@ -1,0 +1,153 @@
+/* ── Reset ────────────────────────────────────────── */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+    cursor: none;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-2);
+    background: var(--bg-page);
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* ── Custom cursor ────────────────────────────────── */
+
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.2s;
+    will-change: transform;
+}
+
+.cursor.visible {
+    opacity: 1;
+}
+
+.cursor-icon {
+    display: block;
+    width: 32px;
+    height: 42px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.cursor-icon svg {
+    width: 32px;
+    height: 42px;
+    display: block;
+}
+
+.cursor-dot {
+    display: none;
+}
+
+/* ── Noise overlay ────────────────────────────────── */
+
+.noise {
+    position: fixed;
+    inset: 0;
+    background: url('../assets/noise.png') repeat;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* ── Selection ────────────────────────────────────── */
+
+::selection {
+    background: rgba(99, 102, 241, 0.20);
+    color: var(--text-1);
+}
+
+/* ── Scrollbar ────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--text-4);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* ── Base elements ────────────────────────────────── */
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: none;
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-1);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+code, .mono {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: none;
+}
+
+input, select, textarea {
+    cursor: none;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ── Micro label ──────────────────────────────────── */
+
+.micro {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+/* ── Focus ────────────────────────────────────────── */
+
+:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-dim);
+}
+
+/* ── Disable custom cursor on touch ───────────────── */
+
+@media (hover: none), (pointer: coarse) {
+    html, body, a, button, input, select, textarea {
+        cursor: auto;
+    }
+    .cursor, .cursor-dot {
+        display: none !important;
+    }
+}
