@@ -3,7 +3,8 @@
     "username": "preetigameti@yahoo.com",
     "password": "Dpshar@04",
     "password_found": true,
-    "name": "PREETI GAMETI",
+    "name": "Preeti Gameti",
+    "school": "unknown",
     "profile": {
       "teacher_id": 432,
       "teacher_name": "PREETI GAMETI",
@@ -64,7 +65,8 @@
     "username": "shobha.dpsh@gmail.com",
     "password": "Dpshar@15",
     "password_found": true,
-    "name": "SHOBHA PANDEY",
+    "name": "Shobha Pandey",
+    "school": "unknown",
     "profile": {
       "teacher_id": 438,
       "teacher_name": "SHOBHA PANDEY",
@@ -125,7 +127,8 @@
     "username": "sofiyavora28@gmail.com",
     "password": "Dpshar@95",
     "password_found": true,
-    "name": "SOFIYA A. VORA",
+    "name": "Sofiya A. Vora",
+    "school": "unknown",
     "profile": {
       "teacher_id": 439,
       "teacher_name": "SOFIYA VORA",
@@ -218,7 +221,8 @@
     "username": "vaishalidorkar@gmail.com",
     "password": "Dpshar@75",
     "password_found": true,
-    "name": "VAISHALI DORKAR",
+    "name": "Vaishali Dorkar",
+    "school": "unknown",
     "profile": {
       "teacher_id": 443,
       "teacher_name": "VAISHALI DORKAR",
@@ -287,6 +291,7 @@
     "username": "maheshshitole76@gmail.com",
     "password": null,
     "password_found": false,
-    "name": "MAHESH SHITOLE"
+    "name": "Mahesh Shitole",
+    "school": "unknown"
   }
 ]
