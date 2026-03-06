@@ -1,6 +1,6 @@
 /**
- * data.js — Shared data loader, school state, utilities.
- * Used by all pages except landing.
+ * data.js — Shared data loader, school state, PIN auth, utilities.
+ * acad_INFO v4.3
  */
 
 const DATA = {
@@ -39,8 +39,97 @@ const SCHOOL = {
         if (!DATA.meta || !DATA.meta.schools) return { name: this.active, code: this.active, count: 0 };
         return DATA.meta.schools.find(s => s.code === this.active) || { name: this.active, code: this.active, count: 0 };
     },
+
+    sectionCount() {
+        const stats = this.stats();
+        return Object.keys(stats.section_counts || {}).length;
+    },
 };
 
+
+/* ── PIN authentication ───────────────────────────── */
+
+const _AK = atob('MTMzNw==');
+
+function isAuthed() {
+    return sessionStorage.getItem('acad-auth') === '1';
+}
+
+function setAuthed() {
+    sessionStorage.setItem('acad-auth', '1');
+}
+
+function showPinModal(onSuccess) {
+    if (isAuthed()) { onSuccess(); return; }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'pin-overlay';
+    overlay.innerHTML = `
+    <div class="pin-modal">
+    <span class="micro">RESTRICTED ACCESS</span>
+    <h3>Enter PIN</h3>
+    <p>Sensitive data is protected. Enter the access PIN to reveal credentials and contact information.</p>
+    <input type="password" class="pin-input" maxlength="10"
+    placeholder="····" autocomplete="off" spellcheck="false">
+    <div class="pin-error"></div>
+    <a href="#" class="pin-cancel" data-hover>Cancel</a>
+    </div>
+    `;
+
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector('.pin-input');
+    const error = overlay.querySelector('.pin-error');
+    const cancel = overlay.querySelector('.pin-cancel');
+
+    requestAnimationFrame(() => input.focus());
+
+    function tryAuth() {
+        if (input.value === _AK) {
+            setAuthed();
+            overlay.remove();
+            onSuccess();
+        } else {
+            error.textContent = 'Incorrect PIN';
+            input.classList.add('pin-error-state');
+            overlay.querySelector('.pin-modal').classList.add('pin-shake');
+            setTimeout(() => {
+                overlay.querySelector('.pin-modal').classList.remove('pin-shake');
+                input.classList.remove('pin-error-state');
+            }, 500);
+            input.value = '';
+            input.focus();
+        }
+    }
+
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') tryAuth();
+        if (e.key === 'Escape') overlay.remove();
+    });
+
+        cancel.addEventListener('click', e => { e.preventDefault(); overlay.remove(); });
+        overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+}
+
+
+/* ── Censor helpers ───────────────────────────────── */
+
+function censorEmail(email) {
+    if (!email) return null;
+    const at = email.indexOf('@');
+    if (at < 0) return '••••';
+    const local = email.slice(0, at);
+    const domain = email.slice(at);
+    const show = Math.max(1, Math.min(2, local.length - 1));
+    return local.slice(0, show) + '•'.repeat(Math.max(local.length - show, 3)) + domain;
+}
+
+function censorPassword(pwd) {
+    if (!pwd) return null;
+    return '•'.repeat(Math.max(pwd.length, 8));
+}
+
+
+/* ── Data loader ──────────────────────────────────── */
 
 async function loadData() {
     if (DATA.loaded) return DATA;
@@ -59,6 +148,7 @@ async function loadData() {
     }
     return DATA;
 }
+
 
 /* ── Utilities ──────────────────────────────────── */
 
@@ -94,10 +184,6 @@ function sortBy(arr, key, desc = false) {
     });
 }
 
-function uniqueVals(arr, key) {
-    return [...new Set(arr.map(i => i[key]).filter(v => v != null && v !== ''))].sort();
-}
-
 function exportCSV(data, filename) {
     if (!data.length) return;
     const keys = Object.keys(data[0]);
@@ -109,25 +195,21 @@ function exportCSV(data, filename) {
 }
 
 function formatGender(g) {
-    const map = {
-        'male': 'Male',
-        'female': 'Female',
-        'prefer_not_to_say': 'Not set',
-        'not_set': 'Not set',
-    };
+    const map = { 'male': 'Male', 'female': 'Female', 'prefer_not_to_say': 'Not set', 'not_set': 'Not set' };
     return map[g] || g || 'Not set';
 }
 
 function debounce(fn, ms) {
     let t;
-    return (...args) => {
-        clearTimeout(t);
-        t = setTimeout(() => fn(...args), ms);
-    };
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+function activityScore(s) {
+    return (s.coins || 0) + ((s.gems || 0) * 50);
 }
 
 
-/* ── School switcher renderer ─────────────────────── */
+/* ── Switcher ─────────────────────────────────────── */
 
 function renderSwitcher(containerId, onChange) {
     const el = document.getElementById(containerId);
@@ -162,7 +244,6 @@ function renderSwitcher(containerId, onChange) {
             }
         }
 
-        // Initial position
         requestAnimationFrame(updateBg);
         window.addEventListener('resize', updateBg);
 
@@ -170,30 +251,30 @@ function renderSwitcher(containerId, onChange) {
             btn.addEventListener('click', () => {
                 const code = btn.dataset.school;
                 if (code === SCHOOL.active) return;
-
                 SCHOOL.set(code);
-
                 btns.forEach(b => {
                     b.classList.toggle('active', b.dataset.school === code);
                     b.setAttribute('aria-selected', b.dataset.school === code);
                 });
-
                 updateBg();
-
                 if (onChange) onChange(code);
             });
         });
 }
 
 
-/* ── Sidebar counts helper ────────────────────────── */
+/* ── Sidebar ──────────────────────────────────────── */
 
 function updateSidebarCounts() {
-    const stats = SCHOOL.stats();
+    const teachers = SCHOOL.teachers();
+    const students = SCHOOL.students();
+    const sections = SCHOOL.sectionCount();
     const navTotal = document.getElementById('nav-total');
     const navStudents = document.getElementById('nav-students');
     const navTeachers = document.getElementById('nav-teachers');
-    if (navTotal)    navTotal.textContent = (stats.total_students || 0).toLocaleString();
-    if (navStudents) navStudents.textContent = (stats.total_students || 0).toLocaleString();
-    if (navTeachers) navTeachers.textContent = (stats.total_teachers_found || 0);
+    const navClasses = document.getElementById('nav-classes');
+    if (navTotal) navTotal.textContent = students.length.toLocaleString();
+    if (navStudents) navStudents.textContent = students.length.toLocaleString();
+    if (navTeachers) navTeachers.textContent = teachers.length;
+    if (navClasses) navClasses.textContent = sections;
 }

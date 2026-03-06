@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers — acad_INFO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/motion.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-brand"><div class="sidebar-dot"></div><span>acad_INFO</span></a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">Overview <span class="sidebar-link-count" id="nav-total"></span></a>
+            <a href="students.html" class="sidebar-link">Students <span class="sidebar-link-count" id="nav-students"></span></a>
+            <a href="classes.html" class="sidebar-link">Classes <span class="sidebar-link-count" id="nav-classes"></span></a>
+            <a href="teachers.html" class="sidebar-link active">Teachers <span class="sidebar-link-count" id="nav-teachers"></span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-meta">
+                <div class="sidebar-meta-row"><span class="sidebar-meta-label">STATUS</span><span class="sidebar-meta-val" style="color:var(--positive)">ONLINE</span></div>
+                <div class="sidebar-meta-row"><span class="sidebar-meta-label">VERSION</span><span class="sidebar-meta-val">v4.3</span></div>
+            </div>
+        </div>
+    </aside>
+    <main class="main">
+        <header class="page-header reveal" style="--d:0">
+            <div><span class="micro">MODULE 04 — FACULTY</span><h1>Teachers</h1></div>
+        </header>
+        <div class="switcher-wrap reveal" style="--d:0" id="school-switcher"></div>
+        <div class="stat-row" id="teacher-stats"></div>
+        <div id="reveal-bar" class="reveal" style="--d:1"></div>
+        <div id="teachers-container"></div>
+    </main>
+</div>
+<script src="js/data.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/teachers.js"></script>
+</body>
+</html>

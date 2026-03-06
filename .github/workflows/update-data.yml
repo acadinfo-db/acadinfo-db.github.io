@@ -1,0 +1,414 @@
+# ═══════════════════════════════════════════════════════════════
+# acad_INFO — Automated Data Pipeline
+#
+# Clones the private scraper, discovers all student accounts,
+# scrapes their profiles, exports to JSON, and commits back.
+#
+# Schedule: Monday + Thursday at 06:00 UTC (11:30 AM IST)
+# Manual:   workflow_dispatch from Actions tab
+#
+# Secrets required:
+#   SCRAPER_PAT — Fine-grained PAT with read access to
+#                 acadinfo-db/acadally-scraper
+# ═══════════════════════════════════════════════════════════════
+
+name: "🔄 Update Dashboard Data"
+
+on:
+  schedule:
+    - cron: '0 6 * * 1,4'
+
+  workflow_dispatch:
+    inputs:
+      skip_discovery:
+        description: 'Skip username discovery (use existing list)'
+        required: false
+        default: 'false'
+        type: boolean
+      force_commit:
+        description: 'Commit even if data is unchanged'
+        required: false
+        default: 'false'
+        type: boolean
+      workers:
+        description: 'Concurrent workers (lower = safer)'
+        required: false
+        default: '40'
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  scrape-and-export:
+    name: "Scrape → Export → Commit"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+
+      # ══════════════════════════════════════════════════════
+      # 1. CHECKOUT REPOS
+      # ══════════════════════════════════════════════════════
+
+      - name: "📂 Checkout dashboard repo"
+        uses: actions/checkout@v4
+        with:
+          path: dashboard
+
+      - name: "🔒 Checkout scraper repo (private)"
+        uses: actions/checkout@v4
+        with:
+          repository: acadinfo-db/acadally-scraper
+          token: ${{ secrets.SCRAPER_PAT }}
+          path: scraper
+
+      # ══════════════════════════════════════════════════════
+      # 2. PYTHON SETUP
+      # ══════════════════════════════════════════════════════
+
+      - name: "🐍 Set up Python ${{ env.PYTHON_VERSION }}"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: "📦 Install dependencies"
+        run: pip install --quiet httpx
+
+      # ══════════════════════════════════════════════════════
+      # 3. PREPARE OUTPUT DIRECTORY
+      # ══════════════════════════════════════════════════════
+
+      - name: "📁 Prepare scraper output directory"
+        run: |
+          mkdir -p scraper/output
+
+          # Verify static teacher files exist
+          echo "Checking static teacher data files..."
+
+          if [ -f "scraper/output/cracked_teachers.txt" ]; then
+            TEACHER_COUNT=$(grep -cv '^#\|^$' scraper/output/cracked_teachers.txt || echo "0")
+            echo "  ✓ cracked_teachers.txt (${TEACHER_COUNT} entries)"
+          else
+            echo "  ⚠ cracked_teachers.txt not found — teacher data will be empty"
+            touch scraper/output/cracked_teachers.txt
+          fi
+
+          if [ -f "scraper/output/teacher_accounts_explored.json" ]; then
+            echo "  ✓ teacher_accounts_explored.json exists"
+          else
+            echo "  ⚠ teacher_accounts_explored.json not found"
+            echo "[]" > scraper/output/teacher_accounts_explored.json
+          fi
+
+      # ══════════════════════════════════════════════════════
+      # 4. PHASE 1: USERNAME DISCOVERY
+      # ══════════════════════════════════════════════════════
+
+      - name: "🔍 Phase 1: Discover valid usernames"
+        if: github.event.inputs.skip_discovery != 'true'
+        working-directory: scraper
+        env:
+          SCRAPER_OUTPUT_DIR: output
+          DISCOVERY_WORKERS: ${{ github.event.inputs.workers || '40' }}
+          REQUEST_TIMEOUT: "20"
+        run: |
+          echo "╔══════════════════════════════════════╗"
+          echo "║  Phase 1: Username Discovery         ║"
+          echo "╚══════════════════════════════════════╝"
+          echo ""
+
+          python discover.py --workers ${DISCOVERY_WORKERS}
+
+          echo ""
+          if [ -f "output/valid_usernames.txt" ]; then
+            COUNT=$(wc -l < output/valid_usernames.txt)
+            echo "✓ Discovered ${COUNT} valid usernames"
+          else
+            echo "✗ Discovery failed — no output file"
+            exit 1
+          fi
+
+      - name: "📋 Verify discovery output"
+        run: |
+          FILE="scraper/output/valid_usernames.txt"
+          if [ ! -f "$FILE" ]; then
+            echo "✗ valid_usernames.txt not found"
+            exit 1
+          fi
+
+          COUNT=$(wc -l < "$FILE")
+          if [ "$COUNT" -lt 100 ]; then
+            echo "⚠ Only ${COUNT} usernames found — suspiciously low"
+            echo "Previous runs found ~1319. Something may be wrong."
+            echo "Continuing anyway..."
+          fi
+
+          echo "✓ ${COUNT} usernames ready for scraping"
+
+          # Show distribution
+          echo ""
+          echo "Distribution:"
+          grep -oP '^[a-z]+' "$FILE" | sort | uniq -c | sort -rn
+
+      # ══════════════════════════════════════════════════════
+      # 5. PHASE 2: PROFILE SCRAPING
+      # ══════════════════════════════════════════════════════
+
+      - name: "⚡ Phase 2: Scrape student profiles"
+        working-directory: scraper
+        env:
+          SCRAPER_OUTPUT_DIR: output
+          SCRAPE_WORKERS: ${{ github.event.inputs.workers || '40' }}
+          SCRAPE_DELAY: "0.05"
+          REQUEST_TIMEOUT: "20"
+        run: |
+          echo "╔══════════════════════════════════════╗"
+          echo "║  Phase 2: Profile Scraping           ║"
+          echo "╚══════════════════════════════════════╝"
+          echo ""
+
+          python main.py --workers ${SCRAPE_WORKERS} --delay ${SCRAPE_DELAY}
+
+          echo ""
+          if [ -f "output/students.db" ]; then
+            SIZE=$(du -h output/students.db | cut -f1)
+            echo "✓ students.db created (${SIZE})"
+
+            # Quick row count
+            ROWS=$(python3 -c "
+          import sqlite3
+          conn = sqlite3.connect('output/students.db')
+          print(conn.execute('SELECT COUNT(*) FROM students').fetchone()[0])
+          conn.close()
+          ")
+            echo "✓ ${ROWS} student records in database"
+          else
+            echo "✗ Scraping failed — no database file"
+            exit 1
+          fi
+
+      # ══════════════════════════════════════════════════════
+      # 6. EXPORT TO JSON
+      # ══════════════════════════════════════════════════════
+
+      - name: "📊 Export data to JSON"
+        env:
+          DB_PATH: ${{ github.workspace }}/scraper/output/students.db
+          TEACHERS_PATH: ${{ github.workspace }}/scraper/output/cracked_teachers.txt
+          EXPLORED_PATH: ${{ github.workspace }}/scraper/output/teacher_accounts_explored.json
+          OUTPUT_DIR: ${{ github.workspace }}/dashboard/data
+        run: |
+          echo "╔══════════════════════════════════════╗"
+          echo "║  Export: SQLite → JSON               ║"
+          echo "╚══════════════════════════════════════╝"
+          echo ""
+
+          python dashboard/tools/export_data.py
+
+          echo ""
+          echo "Exported files:"
+          ls -la dashboard/data/
+
+      # ══════════════════════════════════════════════════════
+      # 7. VALIDATE OUTPUT
+      # ══════════════════════════════════════════════════════
+
+      - name: "✅ Validate exported data"
+        id: validate
+        run: |
+          cd dashboard
+
+          python3 -c "
+          import json, sys
+
+          # Load and validate students
+          students = json.load(open('data/students.json'))
+          teachers = json.load(open('data/teachers.json'))
+          meta = json.load(open('data/meta.json'))
+
+          print(f'Students:  {len(students):,}')
+          print(f'Teachers:  {len(teachers)}')
+          print(f'Schools:   {len(meta.get(\"schools\", []))}')
+          print(f'Sections:  {meta.get(\"total_sections\", \"?\")}')
+          print(f'Gems total: {meta.get(\"gems_total\", 0):,}')
+          print(f'Coins total: {meta.get(\"coins_total\", 0):,}')
+          print()
+
+          # Sanity checks
+          errors = []
+          if len(students) < 100:
+              errors.append(f'Too few students: {len(students)}')
+          if not meta.get('schools'):
+              errors.append('No schools in meta')
+          if not meta.get('school_stats'):
+              errors.append('No school_stats in meta')
+
+          # Check each school has data
+          for school in meta.get('schools', []):
+              code = school['code']
+              stats = meta['school_stats'].get(code, {})
+              count = stats.get('total_students', 0)
+              print(f'  {school[\"name\"]}: {count:,} students')
+              if count == 0:
+                  errors.append(f'School {code} has 0 students')
+
+          if errors:
+              print()
+              for e in errors:
+                  print(f'ERROR: {e}')
+              sys.exit(1)
+          else:
+              print()
+              print('All validation checks passed ✓')
+          "
+
+      # ══════════════════════════════════════════════════════
+      # 8. DETECT CHANGES
+      # ══════════════════════════════════════════════════════
+
+      - name: "🔎 Check for data changes"
+        id: diff
+        working-directory: dashboard
+        run: |
+          if git diff --quiet data/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No data changes detected."
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo ""
+            echo "Changes detected:"
+            git diff --stat data/
+
+            # Show what actually changed
+            echo ""
+            echo "Detailed diff (students.json size):"
+            OLD_SIZE=$(git show HEAD:data/students.json 2>/dev/null | wc -c || echo "0")
+            NEW_SIZE=$(wc -c < data/students.json)
+            echo "  Old: ${OLD_SIZE} bytes"
+            echo "  New: ${NEW_SIZE} bytes"
+
+            # Compare student counts
+            python3 -c "
+          import json, subprocess, sys
+          try:
+              old = json.loads(subprocess.run(
+                  ['git', 'show', 'HEAD:data/students.json'],
+                  capture_output=True, text=True, cwd='.'
+              ).stdout)
+              new = json.load(open('data/students.json'))
+
+              old_count = len(old)
+              new_count = len(new)
+              diff = new_count - old_count
+
+              # Compare gems/coins totals
+              old_gems = sum(s.get('gems', 0) or 0 for s in old)
+              new_gems = sum(s.get('gems', 0) or 0 for s in new)
+              old_coins = sum(s.get('coins', 0) or 0 for s in old)
+              new_coins = sum(s.get('coins', 0) or 0 for s in new)
+
+              print(f'  Students: {old_count} → {new_count} ({diff:+d})')
+              print(f'  Gems:     {old_gems:,} → {new_gems:,} ({new_gems - old_gems:+,})')
+              print(f'  Coins:    {old_coins:,} → {new_coins:,} ({new_coins - old_coins:+,})')
+          except Exception as e:
+              print(f'  (Could not compare: {e})')
+          " || true
+          fi
+
+      # ══════════════════════════════════════════════════════
+      # 9. COMMIT AND PUSH
+      # ══════════════════════════════════════════════════════
+
+      - name: "💾 Commit and push"
+        if: steps.diff.outputs.changed == 'true' || github.event.inputs.force_commit == 'true'
+        working-directory: dashboard
+        run: |
+          git config user.name "acad_INFO bot"
+          git config user.email "noreply@acadinfo-db.github.io"
+
+          git add data/
+
+          # Build commit message with stats
+          STATS=$(python3 -c "
+          import json
+          m = json.load(open('data/meta.json'))
+          s = len(json.load(open('data/students.json')))
+          t = len(json.load(open('data/teachers.json')))
+          g = m.get('gems_total', 0)
+          c = m.get('coins_total', 0)
+          print(f'{s} students · {t} teachers · {g:,}g · {c:,}c')
+          ")
+
+          DATE=$(date -u +"%Y-%m-%d")
+          git commit -m "data: ${STATS} · ${DATE}"
+          git push
+
+          echo ""
+          echo "✓ Changes committed and pushed"
+
+      # ══════════════════════════════════════════════════════
+      # 10. JOB SUMMARY
+      # ══════════════════════════════════════════════════════
+
+      - name: "📋 Write job summary"
+        if: always()
+        run: |
+          echo "## 📊 acad_INFO Data Pipeline" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| | |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Run** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Trigger** | \`${{ github.event_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "dashboard/data/meta.json" ]; then
+            python3 -c "
+          import json
+
+          m = json.load(open('dashboard/data/meta.json'))
+          s = json.load(open('dashboard/data/students.json'))
+          t = json.load(open('dashboard/data/teachers.json'))
+
+          print('### Results')
+          print()
+          print('| Metric | Value |')
+          print('|--------|------:|')
+          print(f'| Students | **{len(s):,}** |')
+          print(f'| Teachers | **{len(t)}** |')
+          print(f'| Sections | {m.get(\"total_sections\", \"?\")} |')
+          print(f'| Gems (total) | {m.get(\"gems_total\", 0):,} |')
+          print(f'| Coins (total) | {m.get(\"coins_total\", 0):,} |')
+          print(f'| With phone | {m.get(\"students_with_phone\", 0):,} |')
+          print(f'| With email | {m.get(\"students_with_email\", 0):,} |')
+          print()
+
+          for school in m.get('schools', []):
+              code = school['code']
+              stats = m['school_stats'].get(code, {})
+              print(f'**{school[\"name\"]}** — {school[\"count\"]:,} students, '
+                    f'{stats.get(\"total_teachers_found\", 0)} teachers, '
+                    f'{len(stats.get(\"section_counts\", {}))} sections')
+          " >> $GITHUB_STEP_SUMMARY
+
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "${{ steps.diff.outputs.changed }}" == "true" ]; then
+              echo "✅ **Data updated and committed.**" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "ℹ️ **No changes detected.** Data is current." >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❌ **Pipeline failed.** Check step logs." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # ══════════════════════════════════════════════════════
+      # 11. CLEANUP (never leak scraper code in artifacts)
+      # ══════════════════════════════════════════════════════
+
+      - name: "🧹 Cleanup scraper"
+        if: always()
+        run: rm -rf scraper
