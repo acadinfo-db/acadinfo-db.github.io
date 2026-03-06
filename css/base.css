@@ -22,7 +22,21 @@ body {
     color: var(--text-2);
     background: var(--bg-page);
     overflow-x: hidden;
-    cursor: none;
+}
+
+/* ── Aggressively hide native cursor on desktop ───── */
+@media (hover: hover) and (pointer: fine) {
+    *, *::before, *::after {
+        cursor: none !important;
+    }
+}
+
+/* ── Firefox perf: promote animated layers ────────── */
+@-moz-document url-prefix() {
+    .reveal, .fade-enter, .particle, .cursor,
+    .hero-cta, .switcher-bg, .bar-fill {
+        will-change: transform, opacity;
+    }
 }
 
 /* ── Custom cursor (inverted sharp pointer) ───────── */
@@ -34,16 +48,18 @@ body {
     pointer-events: none;
     z-index: 99999;
     opacity: 0;
-    will-change: transform;
+    will-change: transform, opacity;
     mix-blend-mode: difference;
+    transition: opacity 0.2s var(--ease);
 }
 
-.cursor.visible {
-    opacity: 1;
-}
+.cursor.visible { opacity: 1; }
+.cursor.hidden { opacity: 0 !important; }
 
 .cursor-arrow {
     display: block;
+    transform-origin: top left;
+    transition: transform 0.2s var(--ease);
 }
 
 .cursor-arrow svg {
@@ -52,6 +68,21 @@ body {
     height: 24px;
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
+
+.cursor-dot {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background: var(--text-white);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.2s var(--ease);
+}
+
+.cursor.dot .cursor-arrow { transform: scale(0); }
+.cursor.dot .cursor-dot { transform: scale(1); }
 
 /* ── Noise overlay ────────────────────────────────── */
 

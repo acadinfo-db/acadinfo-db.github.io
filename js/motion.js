@@ -69,6 +69,7 @@ function initCursor() {
     stroke-linejoin="round"/>
     </svg>
     </div>
+    <div class="cursor-dot"></div>
     `;
     document.body.appendChild(el);
 
@@ -78,11 +79,27 @@ function initCursor() {
         mx = e.clientX;
         my = e.clientY;
         el.style.transform = `translate(${mx}px, ${my}px)`;
-        if (!el.classList.contains('visible')) el.classList.add('visible');
+        if (!el.classList.contains('visible') && !el.classList.contains('hidden')) el.classList.add('visible');
     }, { passive: true });
 
-        document.addEventListener('mouseleave', () => el.classList.remove('visible'));
-        document.addEventListener('mouseenter', () => el.classList.add('visible'));
+    document.addEventListener('mouseover', e => {
+        const t = e.target;
+        if (t.closest('.hero-cta')) {
+            el.classList.add('hidden');
+            el.classList.remove('dot');
+        } else if (t.closest('a, button, input, select, textarea, [data-copy], [style*="pointer"], .sortable, .reveal-trigger-cell, .switcher-btn, .pagination-btn')) {
+            el.classList.remove('hidden');
+            el.classList.add('dot');
+        } else {
+            el.classList.remove('hidden');
+            el.classList.remove('dot');
+        }
+    });
+
+    document.addEventListener('mouseleave', () => el.classList.remove('visible'));
+    document.addEventListener('mouseenter', () => {
+        if (!el.classList.contains('hidden')) el.classList.add('visible');
+    });
 }
 
 

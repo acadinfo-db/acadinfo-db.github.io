@@ -73,8 +73,10 @@
             state.genderFilter = e.target.value; state.page = 1; applyAndRender();
         });
         document.getElementById('export-btn').addEventListener('click', () => {
-            const data = state.filtered.length ? state.filtered : SCHOOL.students();
-            exportCSV(data, `acad_INFO-students-${SCHOOL.active}.csv`);
+            showPinModal(() => {
+                const data = state.filtered.length ? state.filtered : SCHOOL.students();
+                exportCSV(data, `acad_INFO-students-${SCHOOL.active}.csv`);
+            });
         });
     }
 

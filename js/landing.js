@@ -11,7 +11,7 @@ function typeWithMistakes(el, phrases, opts = {}) {
         typeSpeed   = 55,
         deleteSpeed = 30,
         pauseAfter  = 2600,
-        mistakeRate = 0.07,
+        mistakeRate = 0.03,
     } = opts;
 
     const textEl = el.querySelector('.hero-typing-text');
