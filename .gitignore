@@ -19,8 +19,10 @@ venv/
 env/
 
 # ── Noise texture (generated locally) ────
-# Uncomment if you regenerate it and don't want to track:
 # assets/noise.png
+
+# ── Data (managed by bot) ─────────────────
+data/*.json
 
 # ── Misc ──────────────────────────────────
 node_modules/
