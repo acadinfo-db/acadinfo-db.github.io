@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-03-08T18:47:25.770135+00:00",
-  "total_students": 1396,
+  "last_updated": "2026-03-09T02:50:17.381190+00:00",
+  "total_students": 1395,
   "schools": [
     {
       "name": "Cygnus World School",
@@ -10,7 +10,7 @@
     {
       "name": "Delhi Public School Harni (DPS Harni)",
       "code": "dpshar",
-      "count": 1277
+      "count": 1276
     }
   ],
   "school_stats": {
@@ -44,11 +44,11 @@
       "total_teachers_locked": 0
     },
     "dpshar": {
-      "total_students": 1277,
+      "total_students": 1276,
       "class_counts": {
         "10": 210,
         "6": 283,
-        "7": 254,
+        "7": 253,
         "8": 260,
         "9": 270
       },
@@ -73,7 +73,7 @@
         "7-D": 31,
         "7-E": 31,
         "7-F": 32,
-        "7-G": 31,
+        "7-G": 30,
         "7-H": 32,
         "8-A": 37,
         "8-B": 30,
@@ -93,17 +93,17 @@
         "9-H": 33
       },
       "gender_counts": {
-        "female": 203,
+        "female": 202,
         "prefer_not_to_say": 792,
         "male": 282
       },
-      "students_with_phone": 1277,
-      "students_with_email": 1104,
-      "gems_total": 111717,
+      "students_with_phone": 1276,
+      "students_with_email": 1103,
+      "gems_total": 111687,
       "gems_avg": 87.5,
       "gems_max": 610,
-      "coins_total": 4645960,
-      "coins_avg": 3638.2,
+      "coins_total": 4641445,
+      "coins_avg": 3637.5,
       "coins_max": 41625,
       "zero_gems_count": 33,
       "total_teachers_found": 5,
@@ -114,14 +114,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 133515,
-  "gems_avg": 95.6,
+  "gems_total": 133485,
+  "gems_avg": 95.7,
   "gems_max": 938,
-  "coins_total": 5689445,
-  "coins_avg": 4075.5,
+  "coins_total": 5684930,
+  "coins_avg": 4075.2,
   "coins_max": 41625,
   "zero_gems_count": 36,
-  "students_with_phone": 1281,
-  "students_with_email": 1104,
+  "students_with_phone": 1280,
+  "students_with_email": 1103,
   "total_sections": 42
 }
