@@ -119,32 +119,6 @@ function renderAll() {
                     <span class="teacher-detail-val" style="font-size:0.625rem">${esc(profile.school_name)}</span>
                     </div>` : ''}
 
-                     ${(revealed && typeof lookupStaff === 'function') ? (() => {
-                         const staff = lookupStaff(t.name);
-                         if (!staff) return '';
-                         return `
-                         <div class="teacher-detail-row">
-                         <span class="teacher-detail-label">DOB</span>
-                         <span class="teacher-detail-val">${esc(staff.dob)}</span>
-                         </div>
-                         <div class="teacher-detail-row">
-                         <span class="teacher-detail-label">Grade</span>
-                         <span class="teacher-detail-val">${esc(staff.grade)}</span>
-                         </div>
-                         <div class="teacher-detail-row">
-                         <span class="teacher-detail-label">Subject</span>
-                         <span class="teacher-detail-val">${esc(staff.subject)}</span>
-                         </div>
-                         <div class="teacher-detail-row">
-                         <span class="teacher-detail-label">Qualifications</span>
-                         <span class="teacher-detail-val" style="font-size:0.625rem">${esc(staff.qualifications)}</span>
-                         </div>
-                         <div class="teacher-detail-row">
-                         <span class="teacher-detail-label">Joined</span>
-                         <span class="teacher-detail-val">${esc(staff.joining)}</span>
-                         </div>`;
-                     })() : ''}
-
                     ${classes.length > 0 ? `
                         <div class="teacher-classes">
                         <div class="teacher-classes-title">Class assignments (${classes.length})</div>

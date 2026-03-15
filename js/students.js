@@ -39,21 +39,15 @@
         const students = SCHOOL.students();
         updateSidebarCounts();
 
-        // Classes: just class numbers (6, 7, 8, ...)
         const classSelect = document.getElementById('filter-class');
         const classes = [...new Set(students.map(s => s.class_num).filter(v => v != null))].sort((a, b) => a - b);
         classSelect.innerHTML = '<option value="">All classes</option>' +
         classes.map(c => `<option value="${c}">Class ${c}</option>`).join('');
 
-        // Sections: just section letters (A, B, C, ...)
         const sectionSelect = document.getElementById('filter-section');
-        const sectionLetters = [...new Set(students.map(s => {
-            const sec = (s.section_name || '').replace('Class ', '');
-            const match = sec.match(/[A-Z]$/i);
-            return match ? match[0].toUpperCase() : null;
-        }).filter(v => v))].sort();
+        const sections = [...new Set(students.map(s => (s.section_name || '').replace('Class ', '')).filter(v => v))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
         sectionSelect.innerHTML = '<option value="">All sections</option>' +
-        sectionLetters.map(s => `<option value="${s}">${s}</option>`).join('');
+        sections.map(s => `<option value="${s}">${s}</option>`).join('');
 
         const genderSelect = document.getElementById('filter-gender');
         const genders = [...new Set(students.map(s => s.gender).filter(v => v))].sort();
@@ -101,11 +95,7 @@
 
         if (state.query) list = list.filter(s => searchStudent(s, state.query));
         if (state.classFilter) list = list.filter(s => String(s.class_num) === state.classFilter);
-        if (state.sectionFilter) list = list.filter(s => {
-            const sec = (s.section_name || '').replace('Class ', '');
-            const letter = sec.match(/[A-Z]$/i);
-            return letter && letter[0].toUpperCase() === state.sectionFilter;
-        });
+        if (state.sectionFilter) list = list.filter(s => s.section_name === 'Class ' + state.sectionFilter);
         if (state.genderFilter) list = list.filter(s => s.gender === state.genderFilter);
 
         // For score sorting, we need to compute it
@@ -160,7 +150,7 @@
         <th class="sortable ${sortClass('display_name')}" data-sort="display_name">Name</th>
         <th class="sortable ${sortClass('username')}" data-sort="username">Username</th>
         <th class="sortable ${sortClass('section_name')}" data-sort="section_name">Section</th>
-        <th>Gender</th>
+        <th class="sortable ${sortClass('gender')}" data-sort="gender">Gender</th>
         <th>Phone</th>
         <th>Email</th>
         <th class="sortable ${sortClass('_score')}" data-sort="_score" style="text-align:right">Score</th>
@@ -236,29 +226,6 @@
                 showPinModal(() => applyAndRender());
             });
         });
-
-        // Easter egg: crown emoji for protected user when searched by name
-        if (state.query && state.query.toLowerCase().includes('anirudh')) {
-            page.forEach((s, i) => {
-                if (isProtectedUser && isProtectedUser(s)) {
-                    const row = el.querySelectorAll('tbody tr')[i];
-                    if (row) {
-                        row.style.borderLeft = '3px solid';
-                        row.style.borderImage = 'linear-gradient(180deg, #7C3AED, #34D399, #F59E0B, #EF4444) 1';
-                        const nameCell = row.querySelector('.name-primary');
-                        if (nameCell) {
-                            const original = nameCell.textContent;
-                            nameCell.textContent = '👑 ' + original;
-                            setTimeout(() => { nameCell.textContent = original; }, 3000);
-                        }
-                        setTimeout(() => {
-                            row.style.borderLeft = '';
-                            row.style.borderImage = '';
-                        }, 3000);
-                    }
-                }
-            });
-        }
     }
 
 

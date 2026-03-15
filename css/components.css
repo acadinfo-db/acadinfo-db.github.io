@@ -14,7 +14,7 @@
     align-items: center;
     background: var(--bg-surface-1);
     border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-s);
     padding: 3px;
     gap: 0;
 }
@@ -24,8 +24,8 @@
     top: 3px;
     left: 3px;
     height: calc(100% - 6px);
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(52, 211, 153, 0.08));
-    border-radius: var(--radius-pill);
+    background: var(--bg-surface-3);
+    border-radius: 4px;
     transition: transform 0.35s var(--ease), width 0.35s var(--ease);
     pointer-events: none;
     z-index: 0;
@@ -42,7 +42,7 @@
     color: var(--text-3);
     background: none;
     border: none;
-    border-radius: var(--radius-pill);
+    border-radius: 4px;
     transition: color 0.25s var(--ease);
     white-space: nowrap;
 }
@@ -528,7 +528,7 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
 
 .pagination-btn.active {
     background: var(--accent-dim);
-    border-color: rgba(124, 58, 237, 0.2);
+    border-color: rgba(99, 102, 241, 0.2);
     color: var(--accent);
 }
 
@@ -759,7 +759,7 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(2, 2, 4, 0.85);
+    background: rgba(5, 5, 7, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     animation: fadeIn 0.25s var(--ease);
@@ -779,52 +779,29 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
 .pin-modal h3 { font-size: 1.125rem; margin-bottom: 4px; }
 .pin-modal p { font-size: 0.75rem; color: var(--text-3); margin-bottom: var(--s4); line-height: 1.5; }
 
-/* PIN cells display */
-.pin-cells {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: var(--s3);
-}
-
-.pin-cell {
-    width: 44px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.pin-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5em;
+    text-align: center;
+    color: var(--text-1);
     background: var(--bg-surface-2);
     border: 1px solid var(--border);
     border-radius: var(--radius-s);
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    color: var(--text-1);
     transition: border-color var(--dur-fast) var(--ease);
 }
 
-.pin-cell.filled {
-    border-color: rgba(124, 58, 237, 0.3);
-    background: rgba(124, 58, 237, 0.05);
+.pin-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-@keyframes pin-char-in {
-    0% {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Hidden input that captures keystrokes */
-.pin-input-hidden {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
+.pin-input.pin-error-state {
+    border-color: var(--negative);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .pin-error {

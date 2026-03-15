@@ -1,81 +1,8 @@
 /**
- * landing.js — Landing page: hero reveal, typing, cursor glow, coords.
+ * landing.js — Landing page: typing, particles, coords.
  * All stats load dynamically from meta.json.
- * acad_INFO v5.0
+ * acad_INFO v4.3
  */
-
-/* ── 120fps Hero letter-by-letter reveal ──────────── */
-
-function initHeroReveal() {
-    const lines = document.querySelectorAll('.hero-line');
-    if (!lines.length) return;
-
-    lines.forEach(line => {
-        const text = line.textContent;
-        line.textContent = '';
-        line.classList.add('hero-gradient');
-
-        const chars = [];
-        for (let i = 0; i < text.length; i++) {
-            const span = document.createElement('span');
-            span.className = 'hero-char';
-            span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
-            span.style.opacity = '0';
-            span.style.transform = 'translateY(100%)';
-            line.appendChild(span);
-            chars.push(span);
-        }
-        line._chars = chars;
-    });
-
-    // Observe for scroll visibility
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            obs.unobserve(e.target);
-            animateHeroLines(lines);
-        });
-    }, { threshold: 0.3 });
-
-    obs.observe(lines[0].closest('.hero-inner') || lines[0]);
-}
-
-function animateHeroLines(lines) {
-    let globalDelay = 0;
-
-    lines.forEach((line, lineIdx) => {
-        const chars = line._chars;
-        if (!chars) return;
-
-        const lineDelay = lineIdx * 300; // stagger between lines
-
-        chars.forEach((span, charIdx) => {
-            const delay = lineDelay + charIdx * 30;
-            const startTime = performance.now() + delay;
-            const duration = 600;
-
-            function animate(now) {
-                const elapsed = now - startTime;
-                if (elapsed < 0) {
-                    requestAnimationFrame(animate);
-                    return;
-                }
-
-                const t = Math.min(elapsed / duration, 1);
-                // Smooth ease-out cubic
-                const eased = 1 - Math.pow(1 - t, 3);
-
-                span.style.opacity = eased;
-                span.style.transform = `translateY(${(1 - eased) * 100}%)`;
-
-                if (t < 1) requestAnimationFrame(animate);
-            }
-
-            requestAnimationFrame(animate);
-        });
-    });
-}
-
 
 /* ── Typing effect with realistic mistakes ────────── */
 
@@ -84,7 +11,7 @@ function typeWithMistakes(el, phrases, opts = {}) {
         typeSpeed   = 55,
         deleteSpeed = 30,
         pauseAfter  = 2600,
-        mistakeRate = 0.05,
+        mistakeRate = 0.03,
     } = opts;
 
     const textEl = el.querySelector('.hero-typing-text');
@@ -166,38 +93,31 @@ function typeWithMistakes(el, phrases, opts = {}) {
 }
 
 
-/* ── Cursor glow orb ─────────────────────────────── */
+function initParticles() {
+    const c = document.querySelector('.particles');
+    if (!c) return;
 
-function initCursorGlow() {
-    if (window.matchMedia('(hover: none)').matches) return;
-    if (window.matchMedia('(max-width: 480px)').matches) return;
-
-    const glow = document.createElement('div');
-    glow.className = 'cursor-glow';
-    document.body.appendChild(glow);
-
-    let targetX = -400, targetY = -400;
-    let currentX = -400, currentY = -400;
-    const lerp = 0.08;
-
-    document.addEventListener('mousemove', e => {
-        targetX = e.clientX - 200;
-        targetY = e.clientY - 200;
-        if (!glow.classList.contains('visible')) glow.classList.add('visible');
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => {
-        glow.classList.remove('visible');
-    });
-
-    function tick() {
-        currentX += (targetX - currentX) * lerp;
-        currentY += (targetY - currentY) * lerp;
-        glow.style.transform = `translate(${currentX}px, ${currentY}px)`;
-        requestAnimationFrame(tick);
+    function spawn() {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = (10 + Math.random() * 80) + '%';
+        p.style.bottom = '-10px';
+        const s = 1.5 + Math.random() * 2;
+        p.style.width = s + 'px';
+        p.style.height = s + 'px';
+        p.style.animationDuration = (10 + Math.random() * 14) + 's';
+        p.style.animationDelay = (Math.random() * 6) + 's';
+        const r = Math.random();
+        if (r > 0.65) p.style.background = 'rgba(255,255,255,0.35)';
+        else if (r > 0.4) p.style.background = 'rgba(139,92,246,0.4)';
+        c.appendChild(p);
+        p.addEventListener('animationend', () => p.remove());
     }
 
-    requestAnimationFrame(tick);
+    for (let i = 0; i < 25; i++) spawn();
+    setInterval(() => {
+        if (document.querySelectorAll('.particle').length < 30) spawn();
+    }, 1200);
 }
 
 
@@ -254,6 +174,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             meta = await r.json();
 
             // Set all counter targets from live data
+            const mapping = {
+                'total_students': 'total_students',
+                'total_teachers_found': 'total_teachers_found',
+                'total_schools': null, // computed below
+            };
+
             document.querySelectorAll('.counter[data-key]').forEach(el => {
                 const key = el.dataset.key;
                 let val;
@@ -291,8 +217,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (_) {}
 
     initPage();
-    initHeroReveal();
-    initCursorGlow();
+    initParticles();
     initCoords();
 
     const typingEl = document.querySelector('.hero-typing');

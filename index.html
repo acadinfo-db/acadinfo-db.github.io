@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/motion.css">
     <link rel="stylesheet" href="css/landing.css">
-    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
 </head>
 <body>
 
@@ -63,96 +62,78 @@
         </a>
     </div>
 
-    <div class="line-grid"></div>
+    <div class="particles"></div>
+    <div class="dot-grid"></div>
 </section>
 
-<!-- ── Process — Vertical Timeline ────────────── -->
+<!-- ── Process ─────────────────────────────────── -->
 
 <section class="process">
     <span class="micro reveal" style="--d:0">THE PROCESS</span>
 
-    <div class="timeline">
-        <div class="timeline-item reveal" style="--d:0">
-            <div class="timeline-card" data-hover>
-                <span class="micro">01</span>
-                <h3>Discover</h3>
-                <p>Username enumeration across all school prefixes. No authentication required.</p>
-                <div class="timeline-val">
-                    <em class="counter" data-target="515764">0</em>
-                    <span>credentials checked</span>
-                </div>
+    <div class="process-grid">
+        <div class="process-card reveal" style="--d:0" data-hover>
+            <span class="micro process-num">01</span>
+            <h3>Discover</h3>
+            <p>Username enumeration across all school prefixes. No authentication required.</p>
+            <div class="process-val">
+                <em class="counter" data-target="515764">0</em>
+                <span>credentials checked</span>
             </div>
         </div>
 
-        <div class="timeline-item reveal" style="--d:1">
-            <div class="timeline-card" data-hover>
-                <span class="micro">02</span>
-                <h3>Extract</h3>
-                <p>Automated login and full profile data capture via direct API requests.</p>
-                <div class="timeline-val">
-                    <em class="counter" data-target="0" data-key="total_students">0</em>
-                    <span>profiles captured</span>
-                </div>
+        <div class="process-card reveal" style="--d:1" data-hover>
+            <span class="micro process-num">02</span>
+            <h3>Extract</h3>
+            <p>Automated login and full profile data capture via direct API requests.</p>
+            <div class="process-val">
+                <em class="counter" data-target="0" data-key="total_students">0</em>
+                <span>profiles captured</span>
             </div>
         </div>
 
-        <div class="timeline-item reveal" style="--d:2">
-            <div class="timeline-card" data-hover>
-                <span class="micro">03</span>
-                <h3>Analyze</h3>
-                <p>Structured storage, cross-referencing, and statistical pattern analysis.</p>
-                <div class="timeline-val">
-                    <em class="counter" data-target="18">0</em>
-                    <span>data fields per record</span>
-                </div>
+        <div class="process-card reveal" style="--d:2" data-hover>
+            <span class="micro process-num">03</span>
+            <h3>Analyze</h3>
+            <p>Structured storage, cross-referencing, and statistical pattern analysis.</p>
+            <div class="process-val">
+                <em class="counter" data-target="18">0</em>
+                <span>data fields per record</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── Extraction Log — Terminal ───────────────── -->
+<!-- ── Extraction Log ──────────────────────────── -->
 
 <section class="log">
     <span class="micro reveal" style="--d:0">EXTRACTION LOG</span>
 
-    <div class="log-terminal reveal" style="--d:1">
-        <div class="log-terminal-header">
-            <div class="log-terminal-dot"></div>
-            <div class="log-terminal-dot"></div>
-            <div class="log-terminal-dot"></div>
-            <span class="log-terminal-title">acad_INFO — extraction.log</span>
+    <div class="log-list">
+        <div class="log-entry reveal" style="--d:0">
+            <span class="log-phase">Phase 1</span>
+            <span class="log-desc">Username discovery</span>
+            <span class="log-status ok">✓ complete</span>
         </div>
-        <div class="log-terminal-body">
-            <div class="log-entry">
-                <div class="log-pip ok"></div>
-                <span class="log-phase">Phase 1</span>
-                <span class="log-desc">Username discovery</span>
-                <span class="log-status ok">✓ complete</span>
-            </div>
-            <div class="log-entry">
-                <div class="log-pip ok"></div>
-                <span class="log-phase">Phase 2</span>
-                <span class="log-desc">Profile extraction</span>
-                <span class="log-status ok">✓ complete</span>
-            </div>
-            <div class="log-entry">
-                <div class="log-pip ok"></div>
-                <span class="log-phase">Phase 3</span>
-                <span class="log-desc">Teacher enumeration</span>
-                <span class="log-status ok">✓ complete</span>
-            </div>
-            <div class="log-entry">
-                <div class="log-pip warn"></div>
-                <span class="log-phase">Phase 4</span>
-                <span class="log-desc">Credential cracking</span>
-                <span class="log-status warn">✓ partial</span>
-            </div>
-            <div class="log-entry">
-                <div class="log-pip live"></div>
-                <span class="log-phase">Phase 5</span>
-                <span class="log-desc">Auto-update pipeline</span>
-                <span class="log-status live">active</span>
-            </div>
+        <div class="log-entry reveal" style="--d:1">
+            <span class="log-phase">Phase 2</span>
+            <span class="log-desc">Profile extraction</span>
+            <span class="log-status ok">✓ complete</span>
+        </div>
+        <div class="log-entry reveal" style="--d:2">
+            <span class="log-phase">Phase 3</span>
+            <span class="log-desc">Teacher enumeration</span>
+            <span class="log-status ok">✓ complete</span>
+        </div>
+        <div class="log-entry reveal" style="--d:3">
+            <span class="log-phase">Phase 4</span>
+            <span class="log-desc">Credential cracking</span>
+            <span class="log-status warn">✓ partial</span>
+        </div>
+        <div class="log-entry reveal" style="--d:4">
+            <span class="log-phase">Phase 5</span>
+            <span class="log-desc">Auto-update pipeline</span>
+            <span class="log-status live">active</span>
         </div>
     </div>
 </section>
@@ -163,16 +144,23 @@
     <div class="l-footer-inner">
         <div class="l-footer-left">
             <span class="l-footer-brand">acad_INFO</span>
-            <span class="l-footer-copy">© 2026 Anirudh Gupta</span>
+            <span class="l-footer-copy">© 2025 Anirudh Gupta. All rights reserved.</span>
         </div>
         <div class="l-footer-right">
             <p class="l-footer-disclaimer">
-                Security research demonstration. Data obtained via publicly accessible endpoints. Unauthorized access is illegal.
+                This project is a security research demonstration. The creator assumes
+                no responsibility for any misuse of the information, tools, or data
+                presented. All data was obtained through publicly accessible endpoints
+                with predictable credentials. Unauthorized access to computer systems
+                is illegal. Use responsibly and ethically.
             </p>
-            <div class="l-footer-links">
-                <a href="https://github.com/acadinfo-db" target="_blank" rel="noopener">GitHub</a>
-                <a href="dashboard.html">Database</a>
-            </div>
+        </div>
+    </div>
+    <div class="l-footer-bar">
+        <span class="micro">acad_INFO · AUTO-UPDATING</span>
+        <div class="l-footer-links">
+            <a href="https://github.com/acadinfo-db" target="_blank" rel="noopener">GitHub</a>
+            <a href="dashboard.html">Database</a>
         </div>
     </div>
 </footer>

@@ -99,7 +99,7 @@ body {
 /* ── Selection ────────────────────────────────────── */
 
 ::selection {
-    background: rgba(124, 58, 237, 0.20);
+    background: rgba(99, 102, 241, 0.20);
     color: var(--text-1);
 }
 

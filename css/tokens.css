@@ -1,15 +1,14 @@
 :root {
     /* ── Backgrounds ─────────────────────────────── */
-    --bg-page:       #020204;
-    --bg-surface-1:  #0A0A0E;
-    --bg-surface-2:  #101014;
-    --bg-surface-3:  #18181C;
+    --bg-page:       #050507;
+    --bg-surface-1:  #0C0D10;
+    --bg-surface-2:  #121316;
+    --bg-surface-3:  #1A1B1F;
 
     /* ── Borders ─────────────────────────────────── */
     --border:        rgba(255, 255, 255, 0.05);
     --border-hover:  rgba(255, 255, 255, 0.09);
     --border-active: rgba(255, 255, 255, 0.14);
-    --border-dim:    rgba(255, 255, 255, 0.03);
 
     /* ── Text ────────────────────────────────────── */
     --text-1:        #EDEDF0;
@@ -18,30 +17,19 @@
     --text-4:        #2A2A32;
     --text-white:    #F5F5F7;
 
-    /* ── Accent — Aurora Purple ──────────────────── */
-    --accent:        #7C3AED;
-    --accent-dim:    rgba(124, 58, 237, 0.10);
-    --accent-glow:   rgba(124, 58, 237, 0.06);
-
-    /* ── Accent 2 — Aurora Green ─────────────────── */
-    --accent-2:      #34D399;
-    --accent-2-dim:  rgba(52, 211, 153, 0.10);
-    --accent-2-glow: rgba(52, 211, 153, 0.06);
+    /* ── Accent (use sparingly) ──────────────────── */
+    --accent:        #6366F1;
+    --accent-dim:    rgba(99, 102, 241, 0.10);
+    --accent-glow:   rgba(99, 102, 241, 0.06);
 
     /* ── Status ──────────────────────────────────── */
-    --positive:      #34D399;
+    --positive:      #10B981;
     --caution:       #F59E0B;
     --negative:      #EF4444;
 
     /* ── Typography ──────────────────────────────── */
     --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-mono:     'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-
-    /* ── Font Weights ────────────────────────────── */
-    --fw-regular:    400;
-    --fw-medium:     500;
-    --fw-semibold:   600;
-    --fw-bold:       700;
 
     /* ── Spacing (8px rhythm) ────────────────────── */
     --s1: 4px;
@@ -61,7 +49,6 @@
     --radius-s:  6px;
     --radius-m:  10px;
     --radius-l:  14px;
-    --radius-pill: 100px;
 
     /* ── Motion ──────────────────────────────────── */
     --ease:       cubic-bezier(0.16, 1, 0.3, 1);

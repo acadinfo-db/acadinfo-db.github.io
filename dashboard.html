@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/motion.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
-    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
 </head>
 <body>
 <div class="noise"></div>
@@ -44,16 +43,10 @@
         </header>
         <div class="switcher-wrap reveal" style="--d:0" id="school-switcher"></div>
         <div class="stat-row" id="stat-row"></div>
-        <div style="display:grid;grid-template-columns:2fr 1fr;gap:var(--s3);margin-bottom:var(--s3);align-items:start;">
-            <div style="display:flex;flex-direction:column;gap:var(--s3);">
-                <div class="card reveal" style="--d:0;margin-bottom:0;">
-                    <h3 class="card-title">Distribution by class</h3>
-                    <div class="bar-rows card-body-grow" id="class-chart"></div>
-                </div>
-                <div class="card reveal" style="--d:0;margin-bottom:0;">
-                    <h3 class="card-title">Sections</h3>
-                    <div class="badge-grid" id="sections-grid"></div>
-                </div>
+        <div class="grid-2">
+            <div class="card reveal" style="--d:0">
+                <h3 class="card-title">Distribution by class</h3>
+                <div class="bar-rows card-body-grow" id="class-chart"></div>
             </div>
             <div class="card reveal" style="--d:1">
                 <h3 class="card-title">Platform metrics</h3>
@@ -65,6 +58,10 @@
                 <h3 class="card-title" style="margin-bottom:0">Top performers <span class="card-subtitle">coins + gems × 50</span></h3>
             </div>
             <div class="table-wrap" id="leaderboard"></div>
+        </div>
+        <div class="card reveal" style="--d:0">
+            <h3 class="card-title">Sections</h3>
+            <div class="badge-grid" id="sections-grid"></div>
         </div>
     </main>
 </div>

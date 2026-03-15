@@ -100,6 +100,7 @@ function renderAll() {
             { label: 'Total coins', val: stats.coins_total || 0 },
             { label: 'Average gems', val: stats.gems_avg || 0 },
             { label: 'Average coins', val: stats.coins_avg || 0 },
+            { label: 'Max gems', val: stats.gems_max || 0 },
             { label: 'With phone', val: withPhone },
             { label: 'With email', val: stats.students_with_email || 0 },
         ];
