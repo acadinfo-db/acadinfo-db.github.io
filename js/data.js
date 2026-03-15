@@ -103,14 +103,14 @@ function showPinModal(onSuccess) {
     <span class="micro">RESTRICTED ACCESS</span>
     <h3>Enter PIN</h3>
     <p>Sensitive data is protected. Enter the access PIN to reveal credentials and contact information.</p>
-    <input type="password" class="pin-input-hidden" maxlength="4"
-    autocomplete="off" spellcheck="false" inputmode="numeric">
-    <div class="pin-overlay-fake-input">
+    <div class="pin-cells">
         <div class="pin-cell"></div>
         <div class="pin-cell"></div>
         <div class="pin-cell"></div>
         <div class="pin-cell"></div>
     </div>
+    <input type="password" class="pin-input-hidden" maxlength="4"
+    autocomplete="off" spellcheck="false" inputmode="numeric">
     <div class="pin-error"></div>
     <a href="#" class="pin-cancel" data-hover>Cancel</a>
     </div>
@@ -118,12 +118,10 @@ function showPinModal(onSuccess) {
 
     document.body.appendChild(overlay);
     const input = overlay.querySelector('.pin-input-hidden');
-    const fakeInput = overlay.querySelector('.pin-overlay-fake-input');
     const error = overlay.querySelector('.pin-error');
     const cancel = overlay.querySelector('.pin-cancel');
     const cells = overlay.querySelectorAll('.pin-cell');
 
-    fakeInput.addEventListener('click', () => input.focus());
     requestAnimationFrame(() => input.focus());
 
     // Animate asterisks into cells
@@ -276,10 +274,9 @@ function searchStudent(s, raw) {
     ];
 
     // Every token must match at least one field
-    return tokens.every(token => {
-        const cleanToken = token.replace(/-/g, '');
-        return fields.some(f => f && String(f).toLowerCase().replace(/-/g, '').includes(cleanToken));
-    });
+    return tokens.every(token =>
+        fields.some(f => f && String(f).toLowerCase().includes(token))
+    );
 }
 
 function sortBy(arr, key, desc = false) {

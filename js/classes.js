@@ -9,11 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!DATA.students) return;
 
     renderSwitcher('school-switcher', () => renderAll());
-    
-    document.getElementById('sort-sections')?.addEventListener('change', () => {
-        renderAll();
-    });
-
     renderAll();
 });
 
@@ -78,30 +73,8 @@ function renderAll() {
         bySection[sec].push(s);
     });
 
-    let sortedSections = Object.entries(bySection);
-    const sortVal = document.getElementById('sort-sections')?.value || 'name';
-
-    // Precompute sort metrics
-    sortedSections.forEach(item => {
-        const sec = item[0];
-        const list = item[1];
-        item._students = list.length;
-        item._score = list.reduce((sum, s) => sum + activityScore(s), 0);
-        item._gems = list.reduce((sum, s) => sum + (s.gems || 0), 0);
-        item._coins = list.reduce((sum, s) => sum + (s.coins || 0), 0);
-    });
-
-    if (sortVal === 'name') {
-        sortedSections.sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true }));
-    } else if (sortVal === '-score') {
-        sortedSections.sort((a, b) => b._score - a._score);
-    } else if (sortVal === '-gems') {
-        sortedSections.sort((a, b) => b._gems - a._gems);
-    } else if (sortVal === '-coins') {
-        sortedSections.sort((a, b) => b._coins - a._coins);
-    } else if (sortVal === '-students') {
-        sortedSections.sort((a, b) => b._students - a._students);
-    }
+    const sortedSections = Object.entries(bySection)
+    .sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true }));
 
     container.innerHTML = `
     <div class="grid-3">
@@ -171,6 +144,7 @@ function renderAll() {
             <div class="metric-row"><span class="metric-label">Avg coins</span><span class="metric-val">${avgCoins.toLocaleString()}</span></div>
             <div class="metric-row"><span class="metric-label">Median gems</span><span class="metric-val">${medianGems.toLocaleString()}</span></div>
             <div class="metric-row"><span class="metric-label">Max gems</span><span class="metric-val">${maxGems.toLocaleString()}</span></div>
+            <div class="metric-row"><span class="metric-label">Zero activity</span><span class="metric-val">${zeroActivity}</span></div>
             </div>
             </div>
             </div>`;

@@ -779,31 +779,32 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
 .pin-modal h3 { font-size: 1.125rem; margin-bottom: 4px; }
 .pin-modal p { font-size: 0.75rem; color: var(--text-3); margin-bottom: var(--s4); line-height: 1.5; }
 
-/* Fake input field replacing the old .pin-input but containing the animated asterisk cells */
-.pin-overlay-fake-input {
+/* PIN cells display */
+.pin-cells {
     display: flex;
-    align-items: center;
+    gap: 10px;
     justify-content: center;
-    gap: 0.5em;
-    width: 100%;
-    height: 64px;
-    background: var(--bg-surface-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-s);
-    transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
     margin-bottom: var(--s3);
-    cursor: text;
 }
 
 .pin-cell {
-    width: 24px;
+    width: 44px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-s);
     font-family: var(--font-mono);
     font-size: 1.5rem;
     color: var(--text-1);
-    line-height: 1;
+    transition: border-color var(--dur-fast) var(--ease);
+}
+
+.pin-cell.filled {
+    border-color: rgba(124, 58, 237, 0.3);
+    background: rgba(124, 58, 237, 0.05);
 }
 
 @keyframes pin-char-in {
@@ -826,17 +827,6 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
     pointer-events: none;
 }
 
-.pin-input-hidden:focus + .pin-overlay-fake-input {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.pin-modal.pin-shake .pin-overlay-fake-input {
-    border-color: var(--negative);
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
 .pin-error {
     font-size: 0.75rem;
     color: var(--negative);
@@ -853,16 +843,6 @@ th.sortable.sort-desc::after { transform: rotate(180deg); }
 }
 
 .pin-cancel:hover { color: var(--text-2); }
-
-/* User's highlighted row everywhere */
-.anirudh-row {
-    background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), rgba(52, 211, 153, 0.08)) !important;
-    border-left: 2px solid var(--accent) !important;
-}
-
-.anirudh-row:hover {
-    background: linear-gradient(90deg, rgba(124, 58, 237, 0.12), rgba(52, 211, 153, 0.12)) !important;
-}
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }

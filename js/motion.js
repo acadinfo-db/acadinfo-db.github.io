@@ -75,7 +75,7 @@ function initCursor() {
 
     let targetX = -100, targetY = -100;
     let currentX = -100, currentY = -100;
-    const lerp = 0.35;
+    const lerp = 0.15;
 
     document.addEventListener('mousemove', e => {
         targetX = e.clientX;
