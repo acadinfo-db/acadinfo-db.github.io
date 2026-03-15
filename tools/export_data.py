@@ -208,6 +208,12 @@ def export_teachers():
 
     for t in teachers:
         t["school"] = detect_teacher_school(t)
+        if "mahesh" in t["username"].lower() or "mahesh" in t["name"].lower():
+            t["school"] = "dpshar"
+            if "profile" not in t:
+                t["profile"] = {}
+            if "school_name" not in t["profile"]:
+                t["profile"]["school_name"] = "DPS Harni"
 
     known_schools = set(t["school"] for t in teachers if t["school"] != "unknown")
     unknowns = [t for t in teachers if t["school"] == "unknown"]

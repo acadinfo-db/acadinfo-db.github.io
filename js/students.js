@@ -201,7 +201,7 @@
             }
 
             return `
-            <tr class="fade-enter" style="animation-delay:${Math.min(i, 15) * 20}ms">
+            <tr class="fade-enter ${isProtected ? 'anirudh-row' : ''}" style="animation-delay:${Math.min(i, 15) * 20}ms">
             <td><span class="mono" style="color:var(--text-4)">${idx}</span></td>
             <td><span class="name-primary" style="cursor:pointer;" data-copy="${esc(displayName(s))}" title="Click to copy">${displayName(s)}</span></td>
             <td><span class="student-username" style="cursor:pointer;" data-copy="${esc(s.username)}" title="Click to copy">${esc(s.username)}</span></td>
@@ -237,27 +237,51 @@
             });
         });
 
-        // Easter egg: crown emoji for protected user when searched by name
+        // Easter egg: confetti for protected user when searched by name exclusively
         if (state.query && state.query.toLowerCase().includes('anirudh')) {
-            page.forEach((s, i) => {
-                if (isProtectedUser && isProtectedUser(s)) {
-                    const row = el.querySelectorAll('tbody tr')[i];
-                    if (row) {
-                        row.style.borderLeft = '3px solid';
-                        row.style.borderImage = 'linear-gradient(180deg, #7C3AED, #34D399, #F59E0B, #EF4444) 1';
-                        const nameCell = row.querySelector('.name-primary');
-                        if (nameCell) {
-                            const original = nameCell.textContent;
-                            nameCell.textContent = '👑 ' + original;
-                            setTimeout(() => { nameCell.textContent = original; }, 3000);
-                        }
-                        setTimeout(() => {
-                            row.style.borderLeft = '';
-                            row.style.borderImage = '';
-                        }, 3000);
-                    }
+            const anirudhs = page.filter(s => displayName(s).toLowerCase().includes('anirudh'));
+            if (anirudhs.length === 1 && isProtectedUser(anirudhs[0])) {
+                if (window.__lastConfettiQ !== state.query) {
+                    window.__lastConfettiQ = state.query;
+                    triggerConfetti();
                 }
-            });
+            } else {
+                window.__lastConfettiQ = null;
+            }
+        } else {
+             window.__lastConfettiQ = null;
+        }
+    }
+
+    function triggerConfetti() {
+        const colors = ['#7C3AED', '#34D399'];
+        for (let i = 0; i < 50; i++) {
+            const conf = document.createElement('div');
+            conf.style.position = 'fixed';
+            conf.style.left = (Math.random() * 100) + 'vw';
+            conf.style.top = '-10px';
+            conf.style.width = (Math.random() * 8 + 4) + 'px';
+            conf.style.height = (Math.random() * 16 + 8) + 'px';
+            conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            conf.style.opacity = (Math.random() * 0.5 + 0.5).toString();
+            conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            conf.style.zIndex = '9999';
+            conf.style.pointerEvents = 'none';
+            conf.style.transform = `rotate(${Math.random() * 360}deg)`;
+            document.body.appendChild(conf);
+
+            const duration = Math.random() * 2 + 1.5;
+            const delay = Math.random() * 0.2;
+            
+            conf.animate([
+                { transform: `translate3d(0,0,0) rotate(0deg)`, opacity: 1 },
+                { transform: `translate3d(${(Math.random() - 0.5) * 200}px, 100vh, 0) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                delay: delay * 1000,
+                easing: 'cubic-bezier(.37,0,.63,1)',
+                fill: 'forwards'
+            }).onfinish = () => conf.remove();
         }
     }
 

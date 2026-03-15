@@ -128,7 +128,7 @@ function renderAll() {
         </tr></thead>
         <tbody>
         ${top.map((s, i) => `
-            <tr class="fade-enter" style="animation-delay:${i * 30}ms">
+            <tr class="fade-enter ${isProtectedUser(s) ? 'anirudh-row' : ''}" style="animation-delay:${i * 30}ms">
             <td><span class="rank rank-${i < 3 ? i + 1 : ''}">${i + 1}</span></td>
             <td><span class="name-primary" style="cursor:pointer;" data-copy="${esc(displayName(s))}" title="Click to copy">${displayName(s)}</span></td>
             <td><span class="mono">${esc((s.section_name || '').replace('Class ', ''))}</span></td>

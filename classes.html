@@ -19,7 +19,7 @@
 <div class="layout">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <a href="index.html" class="sidebar-brand"><div class="sidebar-dot"></div><span>acad_INFO</span></a>
+            <a href="index.html" class="sidebar-brand"><img src="assets/logo.svg" alt="acad_INFO logo" style="height: 24px; width: auto;"></a>
         </div>
         <nav class="sidebar-nav">
             <a href="dashboard.html" class="sidebar-link">Overview <span class="sidebar-link-count" id="nav-total"></span></a>
@@ -44,7 +44,16 @@
             <h3 class="card-title">Students per class</h3>
             <div class="bar-rows" id="class-chart"></div>
         </div>
-        <div class="results-info" id="sections-info"></div>
+        <div class="results-info" id="sections-info" style="margin-bottom: var(--s2)"></div>
+        <div class="filters-row" style="margin-bottom: var(--s3)">
+            <select id="sort-sections" class="filter-select">
+                <option value="name">Sort by: Section Name</option>
+                <option value="-score">Net Score (High &rarr; Low)</option>
+                <option value="-gems">Total Gems (High &rarr; Low)</option>
+                <option value="-coins">Total Coins (High &rarr; Low)</option>
+                <option value="-students">Students (High &rarr; Low)</option>
+            </select>
+        </div>
         <div id="sections-container"></div>
     </main>
 </div>
