@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-20T19:01:30.151493+00:00",
+  "last_updated": "2026-03-21T02:38:29.038057+00:00",
   "total_students": 1396,
   "schools": [
     {
@@ -102,8 +102,8 @@
       "gems_total": 112719,
       "gems_avg": 88.3,
       "gems_max": 615,
-      "coins_total": 4634420,
-      "coins_avg": 3629.1,
+      "coins_total": 4634440,
+      "coins_avg": 3629.2,
       "coins_max": 41755,
       "zero_gems_count": 32,
       "total_teachers_found": 5,
@@ -117,7 +117,7 @@
   "gems_total": 134545,
   "gems_avg": 96.4,
   "gems_max": 939,
-  "coins_total": 5684340,
+  "coins_total": 5684360,
   "coins_avg": 4071.9,
   "coins_max": 41755,
   "zero_gems_count": 35,
