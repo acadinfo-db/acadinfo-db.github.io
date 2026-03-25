@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-25T02:52:00.359295+00:00",
+  "last_updated": "2026-03-25T07:14:01.153181+00:00",
   "total_students": 1396,
   "schools": [
     {
@@ -93,8 +93,8 @@
         "9-H": 33
       },
       "gender_counts": {
-        "female": 203,
-        "prefer_not_to_say": 792,
+        "female": 204,
+        "prefer_not_to_say": 791,
         "male": 282
       },
       "students_with_phone": 1277,
@@ -102,8 +102,8 @@
       "gems_total": 112734,
       "gems_avg": 88.3,
       "gems_max": 616,
-      "coins_total": 4634530,
-      "coins_avg": 3629.2,
+      "coins_total": 4635660,
+      "coins_avg": 3630.1,
       "coins_max": 41775,
       "zero_gems_count": 32,
       "total_teachers_found": 5,
@@ -117,8 +117,8 @@
   "gems_total": 134560,
   "gems_avg": 96.4,
   "gems_max": 939,
-  "coins_total": 5684480,
-  "coins_avg": 4072.0,
+  "coins_total": 5685610,
+  "coins_avg": 4072.8,
   "coins_max": 41775,
   "zero_gems_count": 35,
   "students_with_phone": 1281,
