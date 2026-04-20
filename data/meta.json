@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-19T19:03:22.452963+00:00",
-  "total_students": 1395,
+  "last_updated": "2026-04-20T03:40:27.012365+00:00",
+  "total_students": 1396,
   "schools": [
     {
       "name": "Cygnus World School",
@@ -10,7 +10,7 @@
     {
       "name": "Delhi Public School Harni (DPS Harni)",
       "code": "dpshar",
-      "count": 1276
+      "count": 1277
     }
   ],
   "school_stats": {
@@ -49,11 +49,11 @@
       "total_teachers_locked": 0
     },
     "dpshar": {
-      "total_students": 1276,
+      "total_students": 1277,
       "class_counts": {
         "10": 457,
         "6": 20,
-        "7": 284,
+        "7": 285,
         "8": 290,
         "9": 225
       },
@@ -76,7 +76,7 @@
         "7-A": 35,
         "7-B": 37,
         "7-C": 30,
-        "7-D": 34,
+        "7-D": 35,
         "7-E": 42,
         "7-F": 33,
         "7-G": 38,
@@ -100,16 +100,16 @@
       },
       "gender_counts": {
         "female": 205,
-        "prefer_not_to_say": 788,
+        "prefer_not_to_say": 789,
         "male": 283
       },
-      "students_with_phone": 1276,
-      "students_with_email": 1103,
-      "gems_total": 113481,
+      "students_with_phone": 1277,
+      "students_with_email": 1104,
+      "gems_total": 113584,
       "gems_avg": 88.9,
       "gems_max": 623,
-      "coins_total": 4597715,
-      "coins_avg": 3603.2,
+      "coins_total": 4597725,
+      "coins_avg": 3600.4,
       "coins_max": 41885,
       "zero_gems_count": 32,
       "total_teachers_found": 5,
@@ -120,14 +120,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 135707,
+  "gems_total": 135810,
   "gems_avg": 97.3,
   "gems_max": 947,
-  "coins_total": 5650110,
-  "coins_avg": 4050.3,
+  "coins_total": 5650120,
+  "coins_avg": 4047.4,
   "coins_max": 41885,
   "zero_gems_count": 34,
-  "students_with_phone": 1280,
-  "students_with_email": 1103,
+  "students_with_phone": 1281,
+  "students_with_email": 1104,
   "total_sections": 47
 }
