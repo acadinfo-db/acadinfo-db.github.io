@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-21T19:24:11.774766+00:00",
+  "last_updated": "2026-04-22T03:31:07.357881+00:00",
   "total_students": 1395,
   "schools": [
     {
@@ -51,9 +51,9 @@
     "dpshar": {
       "total_students": 1276,
       "class_counts": {
-        "10": 457,
+        "10": 456,
         "6": 20,
-        "7": 284,
+        "7": 285,
         "8": 290,
         "9": 225
       },
@@ -63,7 +63,7 @@
         "10-C": 67,
         "10-D": 71,
         "10-E": 66,
-        "10-F": 65,
+        "10-F": 64,
         "10-G": 27,
         "10-H": 31,
         "6-A": 3,
@@ -73,7 +73,7 @@
         "6-F": 6,
         "6-G": 1,
         "6-H": 2,
-        "7-A": 34,
+        "7-A": 35,
         "7-B": 37,
         "7-C": 30,
         "7-D": 35,
@@ -104,12 +104,12 @@
         "male": 283
       },
       "students_with_phone": 1276,
-      "students_with_email": 1104,
-      "gems_total": 113557,
-      "gems_avg": 89.0,
+      "students_with_email": 1103,
+      "gems_total": 113380,
+      "gems_avg": 88.9,
       "gems_max": 624,
-      "coins_total": 4603590,
-      "coins_avg": 3607.8,
+      "coins_total": 4600160,
+      "coins_avg": 3605.1,
       "coins_max": 42095,
       "zero_gems_count": 32,
       "total_teachers_found": 5,
@@ -120,14 +120,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 136676,
-  "gems_avg": 98.0,
+  "gems_total": 136499,
+  "gems_avg": 97.8,
   "gems_max": 947,
-  "coins_total": 5623935,
-  "coins_avg": 4031.5,
+  "coins_total": 5620505,
+  "coins_avg": 4029.0,
   "coins_max": 42095,
   "zero_gems_count": 34,
   "students_with_phone": 1280,
-  "students_with_email": 1104,
+  "students_with_email": 1103,
   "total_sections": 47
 }
