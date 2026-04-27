@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-27T14:15:48.391918+00:00",
+  "last_updated": "2026-04-27T19:44:57.738790+00:00",
   "total_students": 1394,
   "schools": [
     {
@@ -37,11 +37,11 @@
       },
       "students_with_phone": 4,
       "students_with_email": 0,
-      "gems_total": 23224,
+      "gems_total": 23231,
       "gems_avg": 195.2,
       "gems_max": 1005,
-      "coins_total": 1031515,
-      "coins_avg": 8668.2,
+      "coins_total": 1031530,
+      "coins_avg": 8668.3,
       "coins_max": 37330,
       "zero_gems_count": 2,
       "total_teachers_found": 0,
@@ -53,8 +53,8 @@
       "class_counts": {
         "10": 459,
         "6": 19,
-        "7": 286,
-        "8": 288,
+        "7": 285,
+        "8": 289,
         "9": 223
       },
       "section_counts": {
@@ -80,9 +80,9 @@
         "7-E": 42,
         "7-F": 34,
         "7-G": 38,
-        "7-H": 35,
+        "7-H": 34,
         "8-A": 31,
-        "8-B": 37,
+        "8-B": 38,
         "8-C": 44,
         "8-D": 35,
         "8-E": 34,
@@ -100,16 +100,16 @@
       },
       "gender_counts": {
         "female": 216,
-        "prefer_not_to_say": 765,
-        "male": 294
+        "prefer_not_to_say": 764,
+        "male": 295
       },
       "students_with_phone": 1275,
-      "students_with_email": 1103,
-      "gems_total": 117281,
+      "students_with_email": 1102,
+      "gems_total": 117300,
       "gems_avg": 92.0,
       "gems_max": 628,
-      "coins_total": 4589425,
-      "coins_avg": 3599.5,
+      "coins_total": 4609535,
+      "coins_avg": 3615.3,
       "coins_max": 42645,
       "zero_gems_count": 28,
       "total_teachers_found": 5,
@@ -120,14 +120,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 140505,
+  "gems_total": 140531,
   "gems_avg": 100.8,
   "gems_max": 1005,
-  "coins_total": 5620940,
-  "coins_avg": 4032.2,
+  "coins_total": 5641065,
+  "coins_avg": 4046.7,
   "coins_max": 42645,
   "zero_gems_count": 30,
   "students_with_phone": 1279,
-  "students_with_email": 1103,
+  "students_with_email": 1102,
   "total_sections": 47
 }
