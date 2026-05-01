@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T13:47:11.267579+00:00",
+  "last_updated": "2026-05-01T19:24:29.965243+00:00",
   "total_students": 1661,
   "schools": [
     {
@@ -42,11 +42,11 @@
       },
       "students_with_phone": 254,
       "students_with_email": 0,
-      "gems_total": 35354,
-      "gems_avg": 95.8,
+      "gems_total": 35397,
+      "gems_avg": 95.9,
       "gems_max": 1005,
-      "coins_total": 1506385,
-      "coins_avg": 4082.3,
+      "coins_total": 1510430,
+      "coins_avg": 4093.3,
       "coins_max": 37330,
       "zero_gems_count": 24,
       "total_teachers_found": 0,
@@ -56,9 +56,9 @@
     "dpshar": {
       "total_students": 1292,
       "class_counts": {
-        "10": 465,
+        "10": 464,
         "5": 3,
-        "6": 22,
+        "6": 23,
         "7": 291,
         "8": 285,
         "9": 226
@@ -66,7 +66,7 @@
       "section_counts": {
         "10-A": 62,
         "10-B": 69,
-        "10-C": 67,
+        "10-C": 66,
         "10-D": 71,
         "10-E": 71,
         "10-F": 66,
@@ -82,7 +82,7 @@
         "6-F": 5,
         "6-G": 1,
         "6-H": 2,
-        "6-I": 2,
+        "6-I": 3,
         "7-A": 35,
         "7-B": 38,
         "7-C": 34,
@@ -109,17 +109,17 @@
         "9-H": 15
       },
       "gender_counts": {
-        "female": 251,
-        "prefer_not_to_say": 720,
-        "male": 321
+        "female": 252,
+        "prefer_not_to_say": 718,
+        "male": 322
       },
       "students_with_phone": 1292,
       "students_with_email": 1117,
-      "gems_total": 134122,
-      "gems_avg": 103.8,
+      "gems_total": 134278,
+      "gems_avg": 103.9,
       "gems_max": 859,
-      "coins_total": 4542550,
-      "coins_avg": 3515.9,
+      "coins_total": 4544450,
+      "coins_avg": 3517.4,
       "coins_max": 33060,
       "zero_gems_count": 23,
       "total_teachers_found": 5,
@@ -130,11 +130,11 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 169476,
-  "gems_avg": 102.0,
+  "gems_total": 169675,
+  "gems_avg": 102.2,
   "gems_max": 1005,
-  "coins_total": 6048935,
-  "coins_avg": 3641.7,
+  "coins_total": 6054880,
+  "coins_avg": 3645.3,
   "coins_max": 37330,
   "zero_gems_count": 47,
   "students_with_phone": 1546,
