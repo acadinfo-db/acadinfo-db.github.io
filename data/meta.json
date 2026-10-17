@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-10-17T15:24:56.572173+00:00",
-  "total_students": 1311,
+  "last_updated": "2026-10-17T20:27:49.688888+00:00",
+  "total_students": 1315,
   "schools": [
     {
       "name": "Cygnus World School",
@@ -10,7 +10,7 @@
     {
       "name": "Delhi Public School Harni (DPS Harni)",
       "code": "dpshar",
-      "count": 1289
+      "count": 1293
     }
   ],
   "school_stats": {
@@ -44,24 +44,24 @@
       "total_teachers_locked": 0
     },
     "dpshar": {
-      "total_students": 1289,
+      "total_students": 1293,
       "class_counts": {
-        "10": 467,
+        "10": 471,
         "5": 5,
         "6": 22,
-        "7": 289,
+        "7": 288,
         "8": 284,
-        "9": 222
+        "9": 223
       },
       "section_counts": {
-        "10-A": 62,
+        "10-A": 63,
         "10-B": 69,
         "10-C": 69,
         "10-D": 70,
         "10-E": 72,
         "10-F": 69,
         "10-G": 27,
-        "10-H": 29,
+        "10-H": 32,
         "5-A": 1,
         "5-B": 1,
         "5-E": 2,
@@ -75,7 +75,7 @@
         "6-H": 2,
         "6-I": 3,
         "7-A": 34,
-        "7-B": 38,
+        "7-B": 37,
         "7-C": 34,
         "7-D": 35,
         "7-E": 42,
@@ -91,7 +91,7 @@
         "8-G": 35,
         "8-H": 37,
         "9-A": 37,
-        "9-B": 35,
+        "9-B": 36,
         "9-C": 28,
         "9-D": 17,
         "9-E": 25,
@@ -100,17 +100,17 @@
         "9-H": 15
       },
       "gender_counts": {
-        "female": 261,
+        "female": 263,
         "prefer_not_to_say": 684,
-        "male": 344
+        "male": 346
       },
-      "students_with_phone": 1289,
-      "students_with_email": 1110,
-      "gems_total": 157175,
-      "gems_avg": 121.9,
+      "students_with_phone": 1293,
+      "students_with_email": 1114,
+      "gems_total": 157710,
+      "gems_avg": 122.0,
       "gems_max": 1483,
-      "coins_total": 5623040,
-      "coins_avg": 4362.3,
+      "coins_total": 5642720,
+      "coins_avg": 4364.1,
       "coins_max": 47150,
       "zero_gems_count": 17,
       "total_teachers_found": 5,
@@ -121,14 +121,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 164761,
+  "gems_total": 165296,
   "gems_avg": 125.7,
   "gems_max": 1483,
-  "coins_total": 5765300,
-  "coins_avg": 4397.6,
+  "coins_total": 5784980,
+  "coins_avg": 4399.2,
   "coins_max": 47150,
   "zero_gems_count": 17,
-  "students_with_phone": 1300,
-  "students_with_email": 1110,
+  "students_with_phone": 1304,
+  "students_with_email": 1114,
   "total_sections": 48
 }
