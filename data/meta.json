@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-11-07T21:43:50.888346+00:00",
-  "total_students": 1317,
+  "last_updated": "2026-11-08T05:43:44.416043+00:00",
+  "total_students": 1315,
   "schools": [
     {
       "name": "Cygnus World School",
@@ -10,7 +10,7 @@
     {
       "name": "Delhi Public School Harni (DPS Harni)",
       "code": "dpshar",
-      "count": 1295
+      "count": 1293
     }
   ],
   "school_stats": {
@@ -44,9 +44,9 @@
       "total_teachers_locked": 0
     },
     "dpshar": {
-      "total_students": 1295,
+      "total_students": 1293,
       "class_counts": {
-        "10": 472,
+        "10": 470,
         "5": 5,
         "6": 22,
         "7": 289,
@@ -59,7 +59,7 @@
         "10-C": 69,
         "10-D": 71,
         "10-E": 72,
-        "10-F": 70,
+        "10-F": 68,
         "10-G": 27,
         "10-H": 32,
         "5-A": 1,
@@ -100,17 +100,17 @@
         "9-H": 15
       },
       "gender_counts": {
-        "female": 269,
-        "prefer_not_to_say": 665,
+        "female": 268,
+        "prefer_not_to_say": 664,
         "male": 361
       },
-      "students_with_phone": 1295,
-      "students_with_email": 1116,
-      "gems_total": 169735,
-      "gems_avg": 131.1,
+      "students_with_phone": 1293,
+      "students_with_email": 1115,
+      "gems_total": 169644,
+      "gems_avg": 131.2,
       "gems_max": 1545,
-      "coins_total": 5632045,
-      "coins_avg": 4349.1,
+      "coins_total": 5619690,
+      "coins_avg": 4346.2,
       "coins_max": 47640,
       "zero_gems_count": 16,
       "total_teachers_found": 5,
@@ -121,14 +121,14 @@
   "total_teachers_found": 5,
   "total_teachers_cracked": 4,
   "total_teachers_in_list": 52,
-  "gems_total": 177336,
-  "gems_avg": 134.7,
+  "gems_total": 177245,
+  "gems_avg": 134.8,
   "gems_max": 1545,
-  "coins_total": 5781510,
-  "coins_avg": 4389.9,
+  "coins_total": 5769155,
+  "coins_avg": 4387.2,
   "coins_max": 47640,
   "zero_gems_count": 16,
-  "students_with_phone": 1306,
-  "students_with_email": 1116,
+  "students_with_phone": 1304,
+  "students_with_email": 1115,
   "total_sections": 48
 }
